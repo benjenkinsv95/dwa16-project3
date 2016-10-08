@@ -1,16 +1,31 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| This file is where you may define all of the routes that are handled
-| by your application. Just tell Laravel the URIs it should respond
-| to using a Closure or controller method. Build something great!
-|
-*/
+use Illuminate\Support\Facades\Route;
 
+/**
+ * Foobooks code
+ * TODO remove foobooks, this is just p3
+ */
+Route::resource('books', 'BookController');
+
+/**
+ * Main home page
+ */
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
+
+Route::get('/password_generator', 'PasswordGeneratorController@index')->name('password_generator.index');
+Route::post('/password_generator', 'PasswordGeneratorController@store')->name('password_generator.store');
+Route::resource('lorem_ipsum_generator', 'LoremIpsumGeneratorController');
+Route::resource('random_user_generator', 'RandomUserGeneratorController');
+
+/**
+ * A quick and dirty way to set up a whole bunch of practice routes
+ * that I'll use in lecture.
+ * From: https://github.com/susanBuck/dwa15-fall2016-notes/blob/master/03_Laravel/99_Practice.md
+ */
+Route::get('/practice', 'PracticeController@index')->name('practice.index');
+for ($i = 0; $i < 100; $i++) {
+    Route::get('/practice/' . $i, 'PracticeController@example' . $i)->name('practice.example' . $i);
+}
