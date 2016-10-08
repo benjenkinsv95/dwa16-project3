@@ -8,35 +8,27 @@ use Project3\Http\Requests;
 
 class PasswordGeneratorController extends Controller
 {
+    const MIN_NUM_WORDS = 1;
+    const MAX_NUM_WORDS = 9;
+    const SYMBOLS = ['~', '!', '@', '#', '$', '%', '^', '&', '*', '?'];
+    const DIGITS = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+
     private $error;
-    private $generatedPassword;
 
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public
-    function index()
+    public function index()
     {
-        global $generatedPassword;
-        $generatedPassword = "";
-        define("MIN_NUM_WORDS", 1);
-        define("MAX_NUM_WORDS", 9);
-
-        # Only generate a password if the submit button was pressed
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $generatedPassword = $this->generateRandomPassword();
-        }
-
-        return view('password_generator', array('generatedPassword' => $generatedPassword, 'error' => $this->error));
+        return view('password_generator', array('generatedPassword' => "", 'error' => $this->error));
     }
 
     /**
      * @return array random password based off of the form the user filled out.
      */
-    private
-    function generateRandomPassword()
+    private function generateRandomPassword()
     {
         # Store form data
         $numberOfWords = $_POST['number-of-words'];
@@ -50,8 +42,8 @@ class PasswordGeneratorController extends Controller
         } else if (!is_numeric($numberOfWords)) {
             $this->error = "Number of words expected a number but found '$numberOfWords'.";
             return "";
-        } else if ($numberOfWords < MIN_NUM_WORDS || $numberOfWords > MAX_NUM_WORDS) {
-            $this->error = "Number of words should be between '" . MIN_NUM_WORDS . "' and '" . MAX_NUM_WORDS . "', but found '$numberOfWords'.";
+        } else if ($numberOfWords < self::MIN_NUM_WORDS || $numberOfWords > self::MAX_NUM_WORDS) {
+            $this->error = "Number of words should be between '" . self::MIN_NUM_WORDS . "' and '" . self::MAX_NUM_WORDS . "', but found '$numberOfWords'.";
             return "";
         }
 
@@ -76,10 +68,9 @@ class PasswordGeneratorController extends Controller
     /**
      * @return array of words
      */
-    private
-    function getWords()
+    private function getWords()
     {
-#   50 random words from: https://www.randomlists.com/random-words
+        #   50 random words from: https://www.randomlists.com/random-words
         return explode(' ', 'part divide curve entertaining reject temporary interfere motion paper quill spell quack fetch' .
             ' royal bore cup exotic zesty daily branch underwear taste tight friction brick squeal rule wonderful absent ' .
             'stupid dark power prefer route rapid carve word muddled funny honey answer play mighty thoughtful crash' .
@@ -91,8 +82,7 @@ class PasswordGeneratorController extends Controller
      * @param $numberOfWords integer The number of words to return in an array
      * @return array An array of size $numberOfWords filled with randomly chosen words from $words
      */
-    private
-    function getRandomWords($words, $numberOfWords)
+    private function getRandomWords($words, $numberOfWords)
     {
         $randomWords = array();
 
@@ -116,7 +106,7 @@ class PasswordGeneratorController extends Controller
     private
     function getRandomKey($array)
     {
-        $randomIndex = rand(0, count($array) - 1);
+        $randomIndex = mt_rand(0, count($array) - 1);
         $randomKey = $array[$randomIndex];
         return $randomKey;
     }
@@ -125,44 +115,23 @@ class PasswordGeneratorController extends Controller
      * @param $password string The current password
      * @return string Insert a random number at a random spot inside of the $password
      */
-    private
-    function getPasswordWithRandomNumber($password)
+    private function getPasswordWithRandomNumber($password)
     {
-        $randomNumber = $this->getRandomKey($this->getNumbers());
-        $randomIndex = rand(0, strlen($password) - 1);
-        $password = substr_replace($password, $randomNumber, $randomIndex, 0);
-        return $password;
+        $randomNumber = $this->getRandomKey(self::DIGITS);
+        return $this->insertStringAtRandomIndex($password, $randomNumber);
     }
 
-    /**
-     * @return array of numbers from 0-9
-     */
-    private function getNumbers()
-    {
-        # Not beautiful, but quicker than googling? Woo, optimizing for development time!
-        return ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
-    }
 
     /**
      * @param $password string The current password
      * @return string Insert a random special sybol at a random spot inside of the $password
      */
-    private
-    function getPasswordWithRandomSymbol($password)
+    private function getPasswordWithRandomSymbol($password)
     {
-        $randomSymbol = $this->getRandomKey($this->getSymbols());
-        $randomIndex = rand(0, strlen($password) - 1);
-        $password = substr_replace($password, $randomSymbol, $randomIndex, 0);
-        return $password;
+        $randomSymbol = $this->getRandomKey(self::SYMBOLS);
+        return $this->insertStringAtRandomIndex($password, $randomSymbol);
     }
 
-    /**
-     * @return array of special symbols
-     */
-    private function getSymbols()
-    {
-        return ['~', '!', '@', '#', '$', '%', '^', '&', '*', '?'];
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -170,19 +139,21 @@ class PasswordGeneratorController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public
-    function store(Request $request)
+    public function store(Request $request)
     {
-        global $generatedPassword;
-        $generatedPassword = "";
-        define("MIN_NUM_WORDS", 1);
-        define("MAX_NUM_WORDS", 9);
-
-        # Only generate a password if the submit button was pressed
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $generatedPassword = $this->generateRandomPassword();
-        }
-
+        $generatedPassword = $this->generateRandomPassword();
         return view('password_generator', array('generatedPassword' => $generatedPassword, 'error' => $this->error));
+    }
+
+    /**
+     * @param $aString
+     * @param $aSubstring
+     * @return mixed
+     */
+    private function insertStringAtRandomIndex($aString, $aSubstring)
+    {
+        $randomIndex = mt_rand(0, strlen($aString) - 1);
+        $aString = substr_replace($aString, $aSubstring, $randomIndex, 0);
+        return $aString;
     }
 }
