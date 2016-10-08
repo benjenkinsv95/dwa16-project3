@@ -4,7 +4,7 @@
 
 @section('content')
     <article class="container">
-        <h1>Ben's Password Generator</h1>
+        <h1>Password Generator</h1>
 
         <div class="well bs-component">
             <!--    Get a clean URI with htmlspecialchars and avoid hard-coding current file name with $_SERVER["PHP_SELF"] -->
@@ -17,16 +17,18 @@
                         <div class="col-lg-9">
                             <input type="number" class="form-control" id="number-of-words" name="number-of-words"
                                    min="1" max="9" value="5" required>
+                            <br>
+                            <strong>Includes</strong><br>
                             <div class="checkbox">
                                 <label for="number-included">
                                     <input type="checkbox" id="number-included" name="number-included">
-                                    Include Number
+                                     Number
                                 </label>
                             </div>
                             <div class="checkbox">
                                 <label for="special-symbol-included">
                                     <input type="checkbox" id="special-symbol-included" name="special-symbol-included">
-                                    Include Special Symbol
+                                    Special Symbol
                                 </label>
                             </div>
                         </div>
