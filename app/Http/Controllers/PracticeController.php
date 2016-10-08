@@ -3,12 +3,21 @@
 namespace Project3\Http\Controllers;
 
 use Project3\Http\Requests;
+use Rych\Random\Random;
+use Faker\Factory;
 
 class PracticeController extends Controller
 {
     public function example1()
     {
-        return '1';
+        $random = new Random();
+        return $random->getRandomString(8);
+    }
+
+    public function example2()
+    {
+        $factory = Factory::create();
+        return $factory->firstNameMale;
     }
 
     /**

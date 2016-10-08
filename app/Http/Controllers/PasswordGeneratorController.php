@@ -4,6 +4,7 @@ namespace Project3\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Project3\Http\Requests;
+use Rych\Random\Random;
 
 
 class PasswordGeneratorController extends Controller
@@ -11,7 +12,6 @@ class PasswordGeneratorController extends Controller
     const MIN_NUM_WORDS = 1;
     const MAX_NUM_WORDS = 9;
     const SYMBOLS = ['~', '!', '@', '#', '$', '%', '^', '&', '*', '?'];
-    const DIGITS = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
 
     private $error;
 
@@ -117,7 +117,8 @@ class PasswordGeneratorController extends Controller
      */
     private function getPasswordWithRandomNumber($password)
     {
-        $randomNumber = $this->getRandomKey(self::DIGITS);
+        $random = new Random();
+        $randomNumber = $random->getRandomInteger(0, 9);
         return $this->insertStringAtRandomIndex($password, $randomNumber);
     }
 

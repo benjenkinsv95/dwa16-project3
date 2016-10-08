@@ -43,9 +43,9 @@
 
             <div class="collapse navbar-collapse" id="bs-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="http://p1.ben-jenkins.com/">Home</a></li>
+                    <li><a href="{{ url('/') }}">Home</a></li>
                     <!--Tacking in a font-awesome GitHub icon to make it look fancy-->
-                    <li><a href="https://github.com/benjenkinsv95/dwa16-project2">GitHub <i id="p1-github-icon"
+                    <li><a href="https://github.com/benjenkinsv95/dwa16-project3">GitHub <i id="p1-github-icon"
                                                                                             class="fa fa-github"
                                                                                             aria-hidden="true"></i></a>
                     </li>
