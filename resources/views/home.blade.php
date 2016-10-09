@@ -1,12 +1,8 @@
 @extends('layouts.app')
 
-@section('title', 'Home')
+@section('title', 'Developer\'s Best Friend')
 
 @section('content')
-    <h1>
-        Developer's Best Friend
-    </h1>
-
     <ul>
         <li><a href="{{ URL::route('password_generator.index') }}">Password Generator</a></li>
         <li><a href="{{ URL::route('lorem_ipsum_generator.index') }}">Lorem Ipsum Generator</a></li>

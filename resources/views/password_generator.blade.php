@@ -4,7 +4,6 @@
 
 @section('content')
     <article class="container">
-        <h1>Password Generator</h1>
 
         <div class="well bs-component">
             <!--    Get a clean URI with htmlspecialchars and avoid hard-coding current file name with $_SERVER["PHP_SELF"] -->
@@ -43,24 +42,24 @@
                 </fieldset>
 
                 <!-- Print out form errors if they exist, would have preferred to do this around each input.-->
-                <?php if (isset($error)): ?>
-                <section>
-                    <h3>Form error</h3>
-                    <div class="alert alert-danger">
-                        <strong><?php echo $error; ?></strong>
-                    </div>
-                </section>
-                <?php endif ?>
+                @if(isset($error))
+                    <section>
+                        <h3>Form error</h3>
+                        <div class="alert alert-danger">
+                            <strong>{{ $error }}</strong>
+                        </div>
+                    </section>
+                @endif
             </form>
         </div>
 
         <!-- Show password if it exists-->
-        <?php if (!empty(trim($generatedPassword))): ?>
-        <section>
-            <h2>Password</h2>
-            <pre><?php echo $generatedPassword; ?></pre>
-        </section>
-        <?php endif; ?>
+        @if(!empty(trim($generatedPassword)))
+            <section>
+                <h2>Password</h2>
+                <pre>{{ $generatedPassword }}</pre>
+            </section>
+        @endif
     </article>
 @endsection
 

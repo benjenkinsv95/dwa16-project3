@@ -53,6 +53,7 @@
             </div>
         </div>
     </nav>
+    <h1 class="container">@yield('title')</h1>
     <article class="container">
             @yield('content')
     </article>
