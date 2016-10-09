@@ -17,8 +17,11 @@ Route::get('/', function () {
 
 Route::get('/password_generator', 'PasswordGeneratorController@index')->name('password_generator.index');
 Route::post('/password_generator', 'PasswordGeneratorController@store')->name('password_generator.store');
-Route::resource('lorem_ipsum_generator', 'LoremIpsumGeneratorController');
+
 Route::get('/random_user_generator', 'RandomUserGeneratorController@index')->name('random_user_generator.index');
+Route::post('/random_user_generator', 'RandomUserGeneratorController@store')->name('random_user_generator.store');
+
+Route::resource('lorem_ipsum_generator', 'LoremIpsumGeneratorController');
 
 /**
  * Laravel 5 log viewer from: https://github.com/rap2hpoutre/laravel-log-viewer

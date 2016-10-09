@@ -21,7 +21,7 @@
           integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
     {{--TODO Add favicon--}}
-    <link href="images/favicon.png" rel="shortcut icon">
+    <link href="/images/favicon.png" rel="shortcut icon">
     @yield('header')
 </head>
 <body>
