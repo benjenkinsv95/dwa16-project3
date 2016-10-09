@@ -1,13 +1,3 @@
-<html>
-<head>
-
-</head>
-<body>
-
-
-</body>
-</html>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -54,9 +44,9 @@
         </div>
     </nav>
     <h1 class="container">@yield('title')</h1>
-    <article class="container">
+    <div class="container">
             @yield('content')
-    </article>
+    </div>
 </div>
 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"

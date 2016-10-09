@@ -46,7 +46,7 @@
         @foreach($users as $user)
             <div class="row container">
                 <div class="card hovercard">
-                    <img class="cardheader" alt="" src={{$user->getCoverPictureURL()}}>
+                    <img class="cardheader img-responsive" alt="" src={{$user->getCoverPictureURL()}}>
                     <div class="avatar">
                         <img alt="" src={{$user->getProfilePictureURL()}}>
                     </div>
