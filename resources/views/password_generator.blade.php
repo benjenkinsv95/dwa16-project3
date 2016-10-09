@@ -17,7 +17,7 @@
                             <input type="number" class="form-control" id="number-of-words" name="number-of-words"
                                    min="1" max="9" value="5" required>
                             <br>
-                            <strong>Includes</strong><br>
+                            <strong>Include</strong><br>
                             <div class="checkbox">
                                 <label for="number-included">
                                     <input type="checkbox" id="number-included" name="number-included">

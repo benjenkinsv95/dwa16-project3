@@ -8,43 +8,41 @@
 @section('content')
     <div class="row container">
 
-        {{--<div class="well bs-component">--}}
-            <!--    Get a clean URI with htmlspecialchars and avoid hard-coding current file name with $_SERVER["PHP_SELF"] -->
-            <form class="form-horizontal" method="POST" action="{{ url('/random_user_generator') }}">
-                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                <fieldset>
-                    <div class="form-group">
-                        <!-- Inputs get duplicated id's and names, because of the labels and $_POST array.-->
-                        <label for="number-of-users" class="col-lg-3 control-label">How many users? (Max 10)</label>
-                        <div class="col-lg-9">
-                            <input type="number" class="form-control" id="number-of-users" name="number-of-users"
-                                   min="{{ $MIN_NUM_USERS }}" max="{{ $MAX_NUM_USERS }}" value="{{ $numberOfUsers }}" required>
-                        </div>
+        <form class="form-horizontal" method="POST" action="{{ url('/random_user_generator') }}">
+            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+            <fieldset>
+                <div class="form-group">
+                    <!-- Inputs get duplicated id's and names, because of the labels and $_POST array.-->
+                    <label for="number-of-users" class="col-lg-3 control-label">How many users? (Max {{ $MAX_NUM_USERS }})</label>
+                    <div class="col-lg-9">
+                        <input type="number" class="form-control" id="number-of-users" name="number-of-users"
+                               min="{{ $MIN_NUM_USERS }}" max="{{ $MAX_NUM_USERS }}" value="{{ $numberOfUsers }}" required>
                     </div>
+                </div>
 
-                    <div class="form-group">
-                        <div class="col-lg-9 col-lg-offset-3">
-                            <input class="btn btn-primary" type="submit" value="Generate">
-                        </div>
+                <div class="form-group">
+                    <div class="col-lg-9 col-lg-offset-3">
+                        <input class="btn btn-primary" type="submit" value="Generate">
                     </div>
-                </fieldset>
+                </div>
+            </fieldset>
 
-                <!-- Print out form errors if they exist, would have preferred to do this around each input.-->
-                @if(isset($error))
-                    <section>
-                        <h3>Form error</h3>
-                        <div class="alert alert-danger">
-                            <strong>{{ $error }}</strong>
-                        </div>
-                    </section>
-                @endif
-            </form>
-        </div>
-    {{--</div>--}}
+            <!-- Print out form errors if they exist, would have preferred to do this around each input.-->
+            @if(isset($error))
+                <section>
+                    <h3>Form error</h3>
+                    <div class="alert alert-danger">
+                        <strong>{{ $error }}</strong>
+                    </div>
+                </section>
+            @endif
+        </form>
+    </div>
 
     @if (isset($users))
         @foreach($users as $user)
             <div class="row container">
+                {{--Snippet based off of: http://bootsnipp.com/snippets/featured/profile-card--}}
                 <div class="card hovercard">
                     <img class="cardheader img-responsive" alt="" src={{$user->getCoverPictureURL()}}>
                     <div class="avatar">

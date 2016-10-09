@@ -4,45 +4,53 @@
 
 
 @section('content')
-    {{--Snippet based off of: http://bootsnipp.com/snippets/featured/profile-card--}}
-    <div class="row">
-        <div class="col-lg-3 col-sm-6">
-
-            <div class="card hovercard">
-                <div class="cardheader">
-
-                </div>
-                <div class="avatar">
-                    <img alt="" src="http://lorempixel.com/100/100/people/9/">
-                </div>
-                <div class="info">
-                    <div class="title">
-                        <a target="_blank" href="http://scripteden.com/">Script Eden</a>
+    <div class="row container">
+        <form class="form-horizontal" method="POST" action="{{ url('/lorem_ipsum_generator') }}">
+            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+            <fieldset>
+                <div class="form-group">
+                    <!-- Inputs get duplicated id's and names, because of the labels and $_POST array.-->
+                    <label for="number-of-paragraphs" class="col-lg-3 control-label">How many paragraphs? (Max {{ $MAX_NUM_PARAGRAPHS }})</label>
+                    <div class="col-lg-9">
+                        <input type="number" class="form-control" id="number-of-paragraphs" name="number-of-paragraphs"
+                               min="{{ $MIN_NUM_PARAGRAPHS }}" max="{{ $MAX_NUM_PARAGRAPHS }}" value="{{ $numberOfParagraphs }}" required>
                     </div>
-                    <div class="desc">Passionate designer</div>
-                    <div class="desc">Curious developer</div>
-                    <div class="desc">Tech geek</div>
                 </div>
-                <div class="bottom">
-                    <a class="btn btn-primary btn-twitter btn-sm" href="https://twitter.com/webmaniac">
-                        <i class="fa fa-twitter"></i>
-                    </a>
-                    <a class="btn btn-danger btn-sm" rel="publisher"
-                       href="https://plus.google.com/+ahmshahnuralam">
-                        <i class="fa fa-google-plus"></i>
-                    </a>
-                    <a class="btn btn-primary btn-sm" rel="publisher"
-                       href="https://plus.google.com/shahnuralam">
-                        <i class="fa fa-facebook"></i>
-                    </a>
-                    <a class="btn btn-warning btn-sm" rel="publisher" href="https://plus.google.com/shahnuralam">
-                        <i class="fa fa-behance"></i>
-                    </a>
+
+                <div class="form-group">
+                    <!-- Inputs get duplicated id's and names, because of the labels and $_POST array.-->
+                    <label for="number-of-sentences" class="col-lg-3 control-label">How many sentences? (Max {{ $MAX_NUM_SENTENCES }})</label>
+                    <div class="col-lg-9">
+                        <input type="number" class="form-control" id="number-of-sentences" name="number-of-sentences"
+                               min="{{ $MIN_NUM_SENTENCES }}" max="{{ $MAX_NUM_SENTENCES }}" value="{{ $numberOfSentences }}" required>
+                    </div>
                 </div>
-            </div>
 
-        </div>
+                <div class="form-group">
+                    <div class="col-lg-9 col-lg-offset-3">
+                        <input class="btn btn-primary" type="submit" value="Generate">
+                    </div>
+                </div>
+            </fieldset>
 
+            <!-- Print out form errors if they exist, would have preferred to do this around each input.-->
+            @if(isset($error))
+                <section>
+                    <h3>Form error</h3>
+                    <div class="alert alert-danger">
+                        <strong>{{ $error }}</strong>
+                    </div>
+                </section>
+            @endif
+        </form>
     </div>
+
+    @if (isset($paragraphs))
+        @foreach($paragraphs as $paragraph)
+            <div class="row container">
+                <p>{{ $paragraph }}</p>
+            </div>
+        @endforeach
+    @endif
 @endsection
 
