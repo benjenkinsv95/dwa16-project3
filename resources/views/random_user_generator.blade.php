@@ -6,27 +6,32 @@
 @endsection
 
 @section('content')
-    <div class="row">
-        @for ($i = 0; $i < 10; $i++)
-            <div class="card hovercard">
-                {{--Request a different background image per user--}}
-                <img class="cardheader" alt="" src="http://placeimg.com/100{{ $i }}/200/nature">
-                <div class="avatar">
-                    {{--Request a different random image per user--}}
-                    <img alt="" src="http://placeimg.com/20{{ $i }}/200/people">
-                </div>
-                <div class="info">
-                    <div class="title">
-                        Random User
+
+
+    <div class="row container">
+        @if ($users)
+            @foreach($users as $user)
+                <div class="card hovercard">
+                    {{--Request a different background image per user--}}
+                    <img class="cardheader" alt="" src={{$user->getCoverPictureURL()}}>
+                    <div class="avatar">
+                        {{--Request a different random image per user--}}
+                        <img alt="" src={{$user->getProfilePictureURL()}}>
                     </div>
-                    <div class="desc">fake@email.com</div>
-                    <div class="desc">12/3/1973</div>
-                    <div class="desc">2842 Colorado Rd</div>
-                    <div class="desc">(837)-425-7004</div>
-                    <div class="desc">password</div>
+
+                    <div class="info">
+                        <div class="title">{{ $user->getName() }}</div>
+                        <div class="desc">{{ $user->getEmail() }}</div>
+                        <div class="desc">{{ $user->getBirthDate() }}</div>
+                        <div class="desc">{{ $user->getStreetAddress() }}</div>
+                        <div class="desc">{{ $user->getPhoneNumber() }}</div>
+                    </div>
                 </div>
-            </div>
-        @endfor
+            @endforeach
+        @endif
+
+
+
     </div>
 @endsection
 
