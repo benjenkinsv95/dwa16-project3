@@ -107,8 +107,12 @@ class LoremIpsumGeneratorController extends Controller
     public function getPoemSentences()
     {
         $contents = Storage::get("midnight_dreary.txt");
-        // Learned from: http://stackoverflow.com/a/10494335/3500171
-        return preg_split('/(?<=[.?!])[\s]+/', $contents, -1, PREG_SPLIT_NO_EMPTY);
-        //return explode("\r\n", $contents);
+        return $this->getSentencesFromText($contents);
+    }
+
+    private function getSentencesFromText($str){
+        // Regex from: http://stackoverflow.com/a/6360686/3500171
+        $textWithoutMultipleLineBreaks = preg_replace("/[\r\n]+/", "\n", $str);
+        return preg_split('/\n+/', $textWithoutMultipleLineBreaks);
     }
 }
