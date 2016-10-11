@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Password Generator')
+@section('title', 'xkcd-Style Password Generator')
 
 @section('content')
     <article class="container">

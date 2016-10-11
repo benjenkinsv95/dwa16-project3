@@ -21,7 +21,11 @@ Route::post('/password_generator', 'PasswordGeneratorController@store')->name('p
 Route::get('/random_user_generator', 'RandomUserGeneratorController@index')->name('random_user_generator.index');
 Route::post('/random_user_generator', 'RandomUserGeneratorController@store')->name('random_user_generator.store');
 
-Route::resource('lorem_ipsum_generator', 'LoremIpsumGeneratorController');
+Route::get('/lorem_ipsum_generator', 'LoremIpsumGeneratorController@index')->name('lorem_ipsum_generator.index');
+Route::post('/lorem_ipsum_generator', 'LoremIpsumGeneratorController@store')->name('lorem_ipsum_generator.store');
+
+Route::get('/laravel_comment_formatter', 'LaravelCommentFormatterController@index')->name('laravel_comment_formatter.index');
+Route::post('/laravel_comment_formatter', 'LaravelCommentFormatterController@store')->name('laravel_comment_formatter.store');
 
 /**
  * Laravel 5 log viewer from: https://github.com/rap2hpoutre/laravel-log-viewer

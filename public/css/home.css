@@ -74,3 +74,11 @@
     color: #737373;
     text-overflow: ellipsis;
 }
+
+.tool-content {
+    min-height: 250px;
+}
+
+.comment-formatter {
+    min-height: 250px;
+}

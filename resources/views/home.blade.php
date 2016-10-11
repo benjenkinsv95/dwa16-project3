@@ -9,19 +9,22 @@
 @section('content')
     <div class="row first-row">
         <div class="col-sm-6 text-center dev-tool">
-            <i class="fa fa-terminal fa-4x" aria-hidden="true"></i>
-            <h3>Abort, Retry, Ignorum</h3>
-            <p>
-                Once upon a midnight dreary, fingers cramped and vision bleary, system manuals piled high and wasted
-                paper on the floor. Longing for the warmth of bedsheets, still I sat there, doing spreadsheets;
-                having reached the bottom line, I took a floppy from the drawer. Typing with a steady hand,
-                then invoked the SAVE command. But I got a reprimand: it read "Abort, Retry, Ignore."
-            </p>
+            <div class="tool-content">
+                <i class="fa fa-terminal fa-4x" aria-hidden="true"></i>
+                <h3>Abort, Retry, Ignorum</h3>
+                <p>
+                    A Lorem Ipsum Generator based upon a midnight dreary, fingers cramped and vision bleary, system manuals
+                    piled high and wasted paper on the floor. Longing for the warmth of bedsheets, still I sat there,
+                    doing spreadsheets; having reached the bottom line, I took a floppy from the drawer. Typing
+                    with a steady hand, then invoked the SAVE command. But I got a reprimand: it read
+                    "Abort, Retry, Ignore."
+                </p>
+            </div>
             <a href="{{ URL::route('lorem_ipsum_generator.index') }}" class="btn btn-primary">View</a>
         </div>
 
         <div class="col-sm-6 text-center dev-tool">
-            <div class="card hovercard">
+            <div class="card hovercard tool-content">
                 <img class="cardheader img-responsive" alt="" src="http://placeimg.com/600/300/nature">
                 <div class="avatar">
                     <img alt="" src="http://placeimg.com/250/250/people">
@@ -41,31 +44,39 @@
 
                 </div>
             </div>
+
             <a href="{{ URL::route('random_user_generator.index') }}" class="btn btn-primary">View</a>
         </div>
-
     </div>
     <div class="row">
         <div class="col-sm-6 text-center dev-tool">
-            <i class="fa fa-key fa-4x" aria-hidden="true"></i>
-            <h3>Password Generator</h3>
-            <p>
-                Luck was just not in the cards. I saw what I had seen before. Now I typed in desperation. Trying random
-                combinations. Still there came the incantation: Choose: "Abort, Retry, Ignore." There I sat,
-                distraught exhausted, by my own machine accosted.
-            </p>
+            <div class="tool-content">
+                <i class="fa fa-key fa-4x" aria-hidden="true"></i>
+                <h3>xkcd-Style Password Generator</h3>
+                <p>
+                    Create a secure password! Password's are based off of the popular web-comic <a href="https://xkcd.com/936/">xkcd.</a>
+                </p>
+                <pre>crash-tight-en~tertaining-damaging-moti8on</pre>
+            </div>
+
             <a href="{{ URL::route('password_generator.index') }}" class="btn btn-primary">View</a>
         </div>
 
         <div class="col-sm-6 text-center dev-tool">
-            <i class="fa fa-code fa-4x" aria-hidden="true"></i>
-            <h3>Other Project</h3>
-            <p>
-                Again: "Abort, Retry, Ignore." I tried to catch the chips off-guard-- I pressed again, but twice as
-                hard. Luck was just not in the cards. I saw what I had seen before. Now I typed in desperation.
-                Trying random combinations.
-            </p>
-            <a href="/" class="btn btn-primary">View</a>
+            <div class="tool-content">
+                <pre class="text-left comment-formatter">/*
+|--------------------------------------------------------------------
+| Laravel Comment Formatter
+|--------------------------------------------------------------------
+|
+| This tool will format your text in the style of a Laravel
+| comment. Try it out for yourself! Once upon a midnight
+| dreary, fingers cramped and vision bleary...
+|
+*/</pre>
+            </div>
+
+            <a href="{{ URL::route('laravel_comment_formatter.index') }}" class="btn btn-primary">View</a>
         </div>
     </div>
 
