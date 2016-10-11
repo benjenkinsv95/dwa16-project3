@@ -11,7 +11,7 @@ use Project3\RandomUser;
 class RandomUserGeneratorController extends Controller
 {
     private $error;
-    private $numberOfUsers = 3;
+    private $numberOfUsers = 6;
     const MIN_NUM_USERS = 1;
     const MAX_NUM_USERS = 30;
 
