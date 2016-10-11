@@ -19,6 +19,6 @@ class LoremIpsumGeneratorTest extends TestCase
         $paragraphs = $generator->getPoemSentences();
         dump($paragraphs);
         $size = count($paragraphs);
-        self::assertEquals(6, $size);
+        self::assertEquals(24, $size);
     }
 }

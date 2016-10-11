@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Midnight Dreary Ipsum')
+@section('title', 'Abort, Retry, Ignorum')
 @section('header')
     <link href="/css/lorem_ipsum.css" rel="stylesheet">
 @endsection

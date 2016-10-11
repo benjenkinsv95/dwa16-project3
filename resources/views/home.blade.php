@@ -10,7 +10,7 @@
     <div class="row first-row">
         <div class="col-sm-6 text-center dev-tool">
             <i class="fa fa-terminal fa-4x" aria-hidden="true"></i>
-            <h3>Midnight Dreary Ipsum</h3>
+            <h3>Abort, Retry, Ignorum</h3>
             <p>
                 Once upon a midnight dreary, fingers cramped and vision bleary, system manuals piled high and wasted
                 paper on the floor. Longing for the warmth of bedsheets, still I sat there, doing spreadsheets;
