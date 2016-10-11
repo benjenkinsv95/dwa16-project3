@@ -13,7 +13,7 @@ class RandomUserGeneratorController extends Controller
     private $error;
     private $numberOfUsers = 3;
     const MIN_NUM_USERS = 1;
-    const MAX_NUM_USERS = 10;
+    const MAX_NUM_USERS = 30;
 
 
     /**
@@ -103,7 +103,7 @@ class RandomUserGeneratorController extends Controller
     }
 
     public function getCoverPictureWidth($userNumber, $numberOfUsers){
-        return 800 + $this->getWidthOffset($userNumber, $numberOfUsers);
+        return 350 + $this->getWidthOffset($userNumber, $numberOfUsers);
     }
 
     public function getProfilePictureHeight($userNumber, $numberOfUsers){

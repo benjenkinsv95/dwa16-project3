@@ -40,27 +40,27 @@
     </div>
 
     @if (isset($users))
-        @foreach($users as $user)
-            <div class="row container">
-                {{--Snippet based off of: http://bootsnipp.com/snippets/featured/profile-card--}}
-                <div class="card hovercard">
-                    <img class="cardheader img-responsive" alt="" src={{$user->getCoverPictureURL()}}>
-                    <div class="avatar">
-                        <img alt="" src={{$user->getProfilePictureURL()}}>
-                    </div>
+        <div class="row container">
+            @foreach($users as $user)
+                    {{--Snippet based off of: http://bootsnipp.com/snippets/featured/profile-card--}}
+                    <div class="col-md-4 col-sm-6 col-xs-12 card hovercard">
+                        <img class="cardheader img-responsive" alt="" src={{$user->getCoverPictureURL()}}>
+                        <div class="avatar">
+                            <img alt="" src={{$user->getProfilePictureURL()}}>
+                        </div>
 
-                    <div class="info">
-                        <div class="title">{{ $user->getFullName() }}</div>
-                        <div class="desc"><i class="fa fa-user" aria-hidden="true"></i> {{ $user->getUserName() }}</div>
-                        <div class="desc"><i class="fa fa-unlock-alt" aria-hidden="true"></i> {{ $user->getPassword() }}</div>
-                        <div class="desc"><i class="fa fa-envelope" aria-hidden="true"></i> {{ $user->getEmail() }}</div>
-                        <div class="desc"><i class="fa fa-calendar" aria-hidden="true"></i> {{ $user->getBirthDate() }}</div>
-                        <div class="desc"><i class="fa fa-map-marker" aria-hidden="true"></i> {{ $user->getStreetAddress() }}</div>
-                        <div class="desc"><i class="fa fa-mobile" aria-hidden="true"></i> {{ $user->getPhoneNumber() }}</div>
+                        <div class="info">
+                            <div class="title">{{ $user->getFullName() }}</div>
+                            <div class="desc"><i class="fa fa-user" aria-hidden="true"></i> {{ $user->getUserName() }}</div>
+                            <div class="desc"><i class="fa fa-unlock-alt" aria-hidden="true"></i> {{ $user->getPassword() }}</div>
+                            <div class="desc"><i class="fa fa-envelope" aria-hidden="true"></i> {{ $user->getEmail() }}</div>
+                            <div class="desc"><i class="fa fa-calendar" aria-hidden="true"></i> {{ $user->getBirthDate() }}</div>
+                            <div class="desc"><i class="fa fa-map-marker" aria-hidden="true"></i> {{ $user->getStreetAddress() }}</div>
+                            <div class="desc"><i class="fa fa-mobile" aria-hidden="true"></i> {{ $user->getPhoneNumber() }}</div>
+                        </div>
                     </div>
-                </div>
-            </div>
-        @endforeach
+            @endforeach
+        </div>
     @endif
 @endsection
 
