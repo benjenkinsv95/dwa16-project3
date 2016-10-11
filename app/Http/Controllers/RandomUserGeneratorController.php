@@ -81,15 +81,17 @@ class RandomUserGeneratorController extends Controller
     }
 
     private function generateRandomUser($factory, $userNumber, $numberOfUsers){
-        $name = $factory->name;
-        $email = $factory->email;
-        $birthDate = $factory->dateTimeBetween('-40 years', '-20 years')->format('m/d/y');
+        $fullName = $factory->name;
+        $userName = $factory->userName;
+        $password = $factory->password;
+        $email = $userName . '@' . $factory->freeEmailDomain;
+        $birthDate = $factory->dateTimeBetween('-30 years', '-18 years')->format('m/d/y');
         $streetAddress = $factory->streetAddress;
         $phoneNumber = $factory->phoneNumber;
         $coverPictureURL = 'http://placeimg.com/' . $this->getCoverPictureWidth($userNumber, $numberOfUsers) . '/' . $this->getCoverPictureHeight($userNumber, $numberOfUsers).'/nature';
         $profilePictureURL = 'http://placeimg.com/' . $this->getProfilePictureWidth($userNumber, $numberOfUsers) . '/' . $this->getProfilePictureHeight($userNumber, $numberOfUsers).'/people';
 
-        return new RandomUser($name, $email, $birthDate, $streetAddress, $phoneNumber, $coverPictureURL, $profilePictureURL);
+        return new RandomUser($fullName, $userName, $password, $email, $birthDate, $streetAddress, $phoneNumber, $coverPictureURL, $profilePictureURL);
     }
 
     /*

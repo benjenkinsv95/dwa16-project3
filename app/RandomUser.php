@@ -11,7 +11,9 @@ namespace Project3;
 
 class RandomUser
 {
-    private $name;
+    private $fullName;
+    private $userName;
+    private $password;
     private $email;
     private $birthDate;
     private $streetAddress;
@@ -21,7 +23,9 @@ class RandomUser
 
     /**
      * RandomUser constructor.
-     * @param $name
+     * @param $fullName
+     * @param $userName
+     * @param $password
      * @param $email
      * @param $birthDate
      * @param $streetAddress
@@ -29,9 +33,11 @@ class RandomUser
      * @param $coverPictureURL
      * @param $profilePictureURL
      */
-    public function __construct($name, $email, $birthDate, $streetAddress, $phoneNumber, $coverPictureURL, $profilePictureURL)
+    public function __construct($fullName, $userName, $password, $email, $birthDate, $streetAddress, $phoneNumber, $coverPictureURL, $profilePictureURL)
     {
-        $this->name = $name;
+        $this->fullName = $fullName;
+        $this->userName = $userName;
+        $this->password = $password;
         $this->email = $email;
         $this->birthDate = $birthDate;
         $this->streetAddress = $streetAddress;
@@ -39,6 +45,25 @@ class RandomUser
         $this->coverPictureURL = $coverPictureURL;
         $this->profilePictureURL = $profilePictureURL;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getUserName()
+    {
+        return $this->userName;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+
+
 
     /**
      * @return mixed
@@ -59,9 +84,9 @@ class RandomUser
     /**
      * @return mixed
      */
-    public function getName()
+    public function getFullName()
     {
-        return $this->name;
+        return $this->fullName;
     }
 
     /**

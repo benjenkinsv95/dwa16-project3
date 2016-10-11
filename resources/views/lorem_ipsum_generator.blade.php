@@ -1,9 +1,13 @@
 @extends('layouts.app')
 
-@section('title', 'Lorem Ipsum Generator')
+@section('title', 'Midnight Dreary Ipsum')
 
 
 @section('content')
+    <div class="row container">
+        A Lorem Ipsum Generator based on the <a href="https://www.gnu.org/fun/jokes/midnight.dreary.html">"Midnight Dreary" poem.</a>
+    </div>
+
     <div class="row container">
         <form class="form-horizontal" method="POST" action="{{ url('/lorem_ipsum_generator') }}">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
