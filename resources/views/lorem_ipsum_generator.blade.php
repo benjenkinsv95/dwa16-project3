@@ -1,14 +1,15 @@
 @extends('layouts.app')
 
 @section('title', 'Midnight Dreary Ipsum')
+@section('header')
+    <link href="/css/lorem_ipsum.css" rel="stylesheet">
+@endsection
 
 
 @section('content')
     <div class="row container">
         A Lorem Ipsum Generator based on the <a href="https://www.gnu.org/fun/jokes/midnight.dreary.html">"Midnight Dreary" poem.</a>
-    </div>
 
-    <div class="row container">
         <form class="form-horizontal" method="POST" action="{{ url('/lorem_ipsum_generator') }}">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <fieldset>
@@ -50,11 +51,15 @@
     </div>
 
     @if (isset($paragraphs))
-        @foreach($paragraphs as $paragraph)
-            <div class="row container">
-                <p>{{ $paragraph }}</p>
-            </div>
-        @endforeach
+        <div class="row container generated-ipsum">
+            @foreach($paragraphs as $paragraph)
+                @if ($loop->first)
+                    <p class="lead">{{ $paragraph }}</p>
+                @else
+                    <p>{{ $paragraph }}</p>
+                @endif
+            @endforeach
+        </div>
     @endif
 @endsection
 
