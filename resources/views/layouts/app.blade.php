@@ -8,6 +8,7 @@
     <link href="libs/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="libs/font-awesome-4.6.3/css/font-awesome.min.css" rel="stylesheet">
     <link href="images/favicon.png" rel="shortcut icon">
+    <link href="/css/master.css" rel="stylesheet">
     @yield('header')
 </head>
 <body>

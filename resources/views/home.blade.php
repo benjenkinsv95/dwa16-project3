@@ -8,7 +8,7 @@
 
 @section('content')
     <div class="row first-row">
-        <div class="col-sm-6 text-center dev-tool">
+        <div class="col-md-6 text-center dev-tool">
             <div class="tool-content">
                 <i class="fa fa-terminal fa-4x" aria-hidden="true"></i>
                 <h3>Abort, Retry, Ignorum</h3>
@@ -23,7 +23,7 @@
             <a href="{{ URL::route('lorem_ipsum_generator.index') }}" class="btn btn-primary">View</a>
         </div>
 
-        <div class="col-sm-6 text-center dev-tool">
+        <div class="col-md-6 text-center dev-tool">
             <div class="card hovercard tool-content">
                 <img class="cardheader img-responsive" alt="" src="http://placeimg.com/600/300/nature">
                 <div class="avatar">
@@ -49,7 +49,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-6 text-center dev-tool">
+        <div class="col-md-6 text-center dev-tool">
             <div class="tool-content">
                 <i class="fa fa-key fa-4x" aria-hidden="true"></i>
                 <h3>xkcd-Style Password Generator</h3>
@@ -62,7 +62,7 @@
             <a href="{{ URL::route('password_generator.index') }}" class="btn btn-primary">View</a>
         </div>
 
-        <div class="col-sm-6 text-center dev-tool">
+        <div class="col-md-6 text-center dev-tool">
             <div class="tool-content">
                 <pre class="text-left comment-formatter">/*
 |--------------------------------------------------------------------

@@ -1,11 +1,3 @@
-.dev-tool {
-    margin-bottom: 70px;
-}
-
-.first-row {
-    margin-top: 40px;
-}
-
 /*Based off of: http://bootsnipp.com/snippets/featured/profile-card*/
 .card {
     padding-top: 0px;
@@ -75,8 +67,24 @@
     text-overflow: ellipsis;
 }
 
+.dev-tool {
+    margin-bottom: 70px;
+}
+
+@media (max-width: 768px) {
+    .row div {
+        padding: 0;
+    }
+}
+
+.first-row {
+    margin-top: 40px;
+}
+
 .tool-content {
     min-height: 250px;
+    max-width: 100%;
+    width: auto;
 }
 
 .comment-formatter {

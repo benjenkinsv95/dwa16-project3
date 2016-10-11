@@ -6,9 +6,8 @@
 @endsection
 
 @section('content')
-    <div class="row container">
-
-        <form class="form-horizontal" method="POST" action="{{ url('/random_user_generator') }}">
+    <div class="row">
+        <form class="form-horizontal container" method="POST" action="{{ url('/random_user_generator') }}">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <fieldset>
                 <div class="form-group">
@@ -40,7 +39,7 @@
     </div>
 
     @if (isset($users))
-        <div class="row container">
+        <div class="row">
             @foreach($users as $user)
                     {{--Snippet based off of: http://bootsnipp.com/snippets/featured/profile-card--}}
                     <div class="col-md-4 col-sm-6 col-xs-12 card hovercard">
