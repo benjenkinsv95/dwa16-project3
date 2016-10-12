@@ -1,4 +1,4 @@
-/*Based off of: http://bootsnipp.com/snippets/featured/profile-card*/
+/* Learned from: http://bootsnipp.com/snippets/featured/profile-card */
 .card {
     padding-top: 20px;
     margin: 10px 0 20px 0;
@@ -14,6 +14,9 @@
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
+
+    /* Default to invisible */
+    opacity: 0;
 }
 
 .card.hovercard {
@@ -66,3 +69,4 @@
     color: #737373;
     text-overflow: ellipsis;
 }
+

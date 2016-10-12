@@ -88,42 +88,39 @@ class RandomUserGeneratorController extends Controller
         $birthDate = $factory->dateTimeBetween('-30 years', '-18 years')->format('m/d/y');
         $streetAddress = $factory->streetAddress;
         $phoneNumber = $factory->phoneNumber;
-        $coverPictureURL = 'http://placeimg.com/' . $this->getCoverPictureWidth($userNumber, $numberOfUsers) . '/' . $this->getCoverPictureHeight($userNumber, $numberOfUsers).'/nature';
-        $profilePictureURL = 'http://placeimg.com/' . $this->getProfilePictureWidth($userNumber, $numberOfUsers) . '/' . $this->getProfilePictureHeight($userNumber, $numberOfUsers).'/people';
+        $coverPictureURL = 'http://placeimg.com/' . $this->getCoverPictureWidth() . '/' . $this->getCoverPictureHeight().'/nature';
+        $profilePictureURL = 'http://placeimg.com/' . $this->getProfilePictureWidth() . '/' . $this->getProfilePictureHeight().'/people';
 
         return new RandomUser($fullName, $userName, $password, $email, $birthDate, $streetAddress, $phoneNumber, $coverPictureURL, $profilePictureURL);
     }
 
     /*
-     * Profiles and cover pictures must have unique URLS to get unique images returned.
-     */
+    |--------------------------------------------------------------------------
+    | PlaceImg random pictures
+    |--------------------------------------------------------------------------
+    |
+    | Profiles and cover pictures must have unique URLS to get unique images
+    | returned.
+    |
+    */
 
-    public function getCoverPictureHeight($userNumber, $numberOfUsers){
-        return 200 + $this->getHeightOffset($userNumber, $numberOfUsers);
+    public function getCoverPictureHeight(){
+        return 200;
     }
 
-    public function getCoverPictureWidth($userNumber, $numberOfUsers){
-        return 350 + $this->getWidthOffset($userNumber, $numberOfUsers);
+    public function getCoverPictureWidth(){
+        return 350 + $this->getWidthOffset();
     }
 
-    public function getProfilePictureHeight($userNumber, $numberOfUsers){
-        return 250 + $this->getHeightOffset($userNumber, $numberOfUsers);
+    public function getProfilePictureHeight(){
+        return 250;
     }
 
-    public function getProfilePictureWidth($userNumber, $numberOfUsers){
-        return 250 + $this->getWidthOffset($userNumber, $numberOfUsers);
+    public function getProfilePictureWidth(){
+        return 250 + $this->getWidthOffset();
     }
 
-    public function getNumberOfColumns($numberOfUsers){
-        return floor(sqrt($numberOfUsers));
-    }
-
-
-    public function getWidthOffset($userNumber, $numberOfUsers){
-        return (int) ($userNumber / $this->getNumberOfColumns($numberOfUsers));
-    }
-
-    public function getHeightOffset($userNumber, $numberOfUsers){
-        return (int) ($userNumber % $this->getNumberOfColumns($numberOfUsers));
+    public function getWidthOffset(){
+        return random_int(0, 14);
     }
 }

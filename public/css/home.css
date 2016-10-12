@@ -69,6 +69,8 @@
 
 .dev-tool {
     margin-bottom: 70px;
+    /* Default to invisible */
+    opacity: 0;
 }
 
 @media (max-width: 768px) {

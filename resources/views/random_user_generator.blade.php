@@ -3,6 +3,7 @@
 @section('title', 'Random User Generator')
 @section('header')
     <link href="/css/random_user.css" rel="stylesheet">
+
 @endsection
 
 @section('content')
@@ -38,7 +39,7 @@
         <div class="row container">
             @foreach($users as $user)
                     {{--Snippet based off of: http://bootsnipp.com/snippets/featured/profile-card--}}
-                    <div class="col-md-4 col-sm-6 col-xs-12 card hovercard">
+                    <div class="col-md-4 col-sm-6 col-xs-12 card hovercard user">
                         <img class="cardheader img-responsive" alt="" src={{$user->getCoverPictureURL()}}>
                         <div class="avatar">
                             <img alt="" src={{$user->getProfilePictureURL()}}>
@@ -57,5 +58,9 @@
             @endforeach
         </div>
     @endif
+@endsection
+
+@section('footer')
+    <script type="text/javascript" src="/js/user.js"></script>
 @endsection
 
