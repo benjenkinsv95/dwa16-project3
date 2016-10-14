@@ -46,6 +46,7 @@ class LaravelCommentFormatterController extends Controller
      */
     public function store(Request $request)
     {
+        $request->flash();
         return view('laravel_comment_formatter',
             array('PLACEHOLDER_RAW_COMMENT' => self::PLACEHOLDER_RAW_COMMENT,
                 'PLACEHOLDER_TITLE' => self::PLACEHOLDER_TITLE,
