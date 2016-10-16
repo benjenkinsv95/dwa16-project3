@@ -3,5 +3,5 @@
  */
 $(document).ready(function () {
     initialDelay = 600;
-    bounceInToContent('.user', initialDelay);
+    bounceInToContent('.card', initialDelay);
 });

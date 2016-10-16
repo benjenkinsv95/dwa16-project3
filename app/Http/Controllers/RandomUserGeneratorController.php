@@ -61,13 +61,6 @@ class RandomUserGeneratorController extends Controller
      * @param $factory
      * @param $formData
      * @return RandomUser
-     *  @include('forms.checkbox', ['id' => 'pictures-included', 'label' => 'Pictures', 'checked' => 'checked'])
-        @include('forms.checkbox', ['id' => 'username-included', 'label' => 'Username', 'checked' => 'checked'])
-        @include('forms.checkbox', ['id' => 'password-included', 'label' => 'Password', 'checked' => 'checked'])
-        @include('forms.checkbox', ['id' => 'email-included', 'label' => 'Email', 'checked' => 'checked'])
-        @include('forms.checkbox', ['id' => 'birthday-included', 'label' => 'Birthday', 'checked' => 'checked'])
-        @include('forms.checkbox', ['id' => 'address-included', 'label' => 'Address', 'checked' => 'checked'])
-        @include('forms.checkbox', ['id' => 'phone-number-included', 'label' => 'Phone Number', 'checked' => 'checked'])
      */
     private function generateRandomUser($factory, $formData){
         $fullName = $factory->name;
@@ -93,7 +86,7 @@ class RandomUserGeneratorController extends Controller
     |
     */
     public function getCoverPictureHeight(){
-        return 200;
+        return 160;
     }
 
     public function getCoverPictureWidth(){
@@ -101,11 +94,11 @@ class RandomUserGeneratorController extends Controller
     }
 
     public function getProfilePictureHeight(){
-        return 250;
+        return 160;
     }
 
     public function getProfilePictureWidth(){
-        return 250 + $this->getWidthOffset();
+        return 160 + $this->getWidthOffset();
     }
 
     public function getWidthOffset(){

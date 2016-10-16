@@ -19,8 +19,8 @@ class GenerateLoremIpsumRequest extends BuildableFormRequest
     public function rules()
     {
         return $this->getRuleBuilder()
-            ->add('number-of-paragraphs')->required()->min(1)->max(99)->numeric()
-            ->add('number-of-sentences')->required()->min(1)->max(99)->numeric()
+            ->add('number-of-paragraphs')->required()->min(self::MIN_NUM_PARAGRAPHS)->max(self::MAX_NUM_PARAGRAPHS)->numeric()
+            ->add('number-of-sentences')->required()->min(self::MIN_NUM_SENTENCES)->max(self::MAX_NUM_SENTENCES)->numeric()
             ->get();
     }
 }

@@ -1,7 +1,7 @@
-/* Learned from: http://bootsnipp.com/snippets/featured/profile-card */
+/*Based off of: http://bootsnipp.com/snippets/featured/profile-card*/
 .card {
-    padding-top: 20px;
-    margin: 10px 0 20px 0;
+    padding-top: 0px;
+    margin: 0;
     background-color: rgba(214, 224, 226, 0.2);
     border-top-width: 0;
     border-bottom-width: 2px;
@@ -14,8 +14,6 @@
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
-
-    /* Default to invisible */
     opacity: 0;
 }
 
@@ -25,25 +23,25 @@
     overflow: hidden;
     text-align: center;
     background-color: rgba(214, 224, 226, 0.2);
-    margin-bottom: 40px;
+    margin-bottom: 10px;
 }
 
 .card.hovercard .cardheader {
-    height: 200px;
+    height: 150px;
     width: 100%;
 }
 
 .card.hovercard .avatar {
     position: relative;
     top: -125px;
-    margin-bottom: -125px;
+    margin-bottom: -115px;
 }
 
 .card.hovercard .avatar img {
-    width: 250px;
-    height: 250px;
-    max-width: 250px;
-    max-height: 250px;
+    width: 160px;
+    height: 160px;
+    max-width: 160px;
+    max-height: 160px;
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
     border-radius: 50%;
@@ -69,4 +67,3 @@
     color: #737373;
     text-overflow: ellipsis;
 }
-

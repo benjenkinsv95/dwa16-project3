@@ -7,7 +7,7 @@
 @endsection
 
 @section('content')
-    <div class="row first-row">
+    <div class="row">
         <div class="col-md-6 text-center dev-tool">
             <div class="tool-content">
                 <i class="fa fa-terminal fa-4x" aria-hidden="true"></i>

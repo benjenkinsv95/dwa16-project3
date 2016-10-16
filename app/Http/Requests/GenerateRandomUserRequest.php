@@ -7,7 +7,7 @@ use Illuminate\Foundation\Http\FormRequest;
 class GenerateRandomUserRequest extends BuildableFormRequest
 {
     const MIN_NUM_USERS = 1;
-    const MAX_NUM_USERS = 30;
+    const MAX_NUM_USERS = 50;
 
     /**
      * Get the validation rules that apply to the request.
@@ -17,7 +17,7 @@ class GenerateRandomUserRequest extends BuildableFormRequest
     public function rules()
     {
         return $this->getRuleBuilder()
-            ->add('number-of-users')->required()->min(1)->max(30)->numeric()
+            ->add('number-of-users')->required()->min(self::MIN_NUM_USERS)->max(self::MAX_NUM_USERS)->numeric()
             ->get();
     }
 }

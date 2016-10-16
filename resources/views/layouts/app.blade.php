@@ -25,12 +25,41 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="http://p1.ben-jenkins.com/">Ben Jenkins</a>
+                <a class="navbar-brand" href="{{ url('/') }}">Ben Jenkins</a>
             </div>
 
             <div class="collapse navbar-collapse" id="bs-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="{{ url('/') }}">Home</a></li>
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Projects<span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="http://p1.ben-jenkins.com/">Portfolio</a></li>
+                            <li><a href="https://github.com/benjenkinsv95/dwa16-project1">Portfolio GitHub <i id="p1-github-icon"
+                                                                class="fa fa-github"
+                                                                aria-hidden="true"></i></a></li>
+
+                            <li class="divider"></li>
+                            <li><a href="http://p2.ben-jenkins.com/">xkcd Password Generator</a></li>
+                            <li><a href="https://github.com/benjenkinsv95/dwa16-project2">xkcd Password Generator GitHub <i id="p1-github-icon"
+                                                                                                              class="fa fa-github"
+                                                                                                              aria-hidden="true"></i></a></li>
+
+                            <li class="divider"></li>
+                            <li><a href="http://p3.ben-jenkins.com/">Developer's Best Friend</a></li>
+                            <li><a href="https://github.com/benjenkinsv95/dwa16-project3">Developer's Best Friend GitHub <i id="p1-github-icon"
+                                                                                                                            class="fa fa-github"
+                                                                                                                            aria-hidden="true"></i></a></li>
+
+                            <li class="divider"></li>
+                            <li><a href="http://p4.ben-jenkins.com/">Project 4</a></li>
+                            <li><a href="https://github.com/benjenkinsv95/dwa16-project4">Project 4 GitHub <i id="p1-github-icon"
+                                                                                                                            class="fa fa-github"
+                                                                                                                            aria-hidden="true"></i></a></li>
+                        </ul>
+                    </li>
+
                     <!--Tacking in a font-awesome GitHub icon to make it look fancy-->
                     <li><a href="https://github.com/benjenkinsv95/dwa16-project3">GitHub <i id="p1-github-icon"
                                                                                             class="fa fa-github"
@@ -40,7 +69,14 @@
             </div>
         </div>
     </nav>
-    <h1 class="container">@yield('title')</h1>
+
+    <div class="container">
+        <div class="row page-info">
+            <h1>@yield('title')</h1>
+            <h3>@yield('description')</h3>
+        </div>
+    </div>
+
     <div class="container">
             @yield('content')
     </div>

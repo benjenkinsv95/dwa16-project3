@@ -1,17 +1,16 @@
 @extends('layouts.app')
 
 @section('title', 'Abort, Retry, Ignorum')
+@section('description', 'A Lorem Ipsum Generator based on the <a href="https://www.gnu.org/fun/jokes/midnight.dreary.html">"Midnight Dreary" poem.</a>')
+
 @section('header')
     <link href="/css/lorem_ipsum.css" rel="stylesheet">
 @endsection
 
 
 @section('content')
-    <div class="row container">
-        A Lorem Ipsum Generator based on the <a href="https://www.gnu.org/fun/jokes/midnight.dreary.html">"Midnight Dreary" poem.</a>
-        <br>
-
-        <form class="form-horizontal col-xs-12 col-sm-10 col-md-7 col-lg-6" method="POST" action="{{ url('/lorem_ipsum_generator') }}">
+    <div class="row">
+        <form class="col-xs-12 col-md-8" method="POST" action="{{ url('/lorem_ipsum_generator') }}">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <fieldset>
                 <div class="row">

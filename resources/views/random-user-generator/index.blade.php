@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('title', 'Random User Generator')
+@section('description', 'Creates random user\'s for your application.')
+
 @section('header')
     <link href="/css/random_user.css" rel="stylesheet">
 
@@ -8,7 +10,7 @@
 
 @section('content')
     <div class="row container">
-        <form class="form-horizontal col-xs-12 col-sm-10 col-md-7 col-lg-6" method="POST" action="{{ url('/random_user_generator') }}">
+        <form class="col-xs-12 col-sm-10 col-md-6" method="POST" action="{{ url('/random_user_generator') }}">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <fieldset>
                 @include('forms.form_group', ['id' => 'number-of-users'])
@@ -54,13 +56,18 @@
                     </div>
                 </div>
 
-
-                <div class="form-group">
-                    <input class="btn btn-primary" type="submit" value="Generate">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <input class="btn btn-primary btn-block" type="submit" value="Generate">
+                        </div>
+                    </div>
                 </div>
+
             </fieldset>
         </form>
     </div>
+
 
     @if (isset($users))
         <div class="row container">
