@@ -2,9 +2,11 @@
 
 namespace Project3\Http\Controllers;
 
+use Fadion\Rule\Rule;
 use Illuminate\Http\Request;
 use Project3\Http\Requests;
 use Rych\Random\Random;
+use Barryvdh\Debugbar\Facade as Debugbar;
 
 
 class PasswordGeneratorController extends Controller
@@ -13,40 +15,11 @@ class PasswordGeneratorController extends Controller
     const MAX_NUM_WORDS = 9;
     const SYMBOLS = ['~', '!', '@', '#', '$', '%', '^', '&', '*', '?'];
 
-    private $error;
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        return view('password_generator', array('generatedPassword' => "", 'error' => $this->error));
-    }
-
     /**
      * @return array random password based off of the form the user filled out.
      */
-    private function generateRandomPassword()
+    private function generateRandomPassword($numberOfWords, $numberIncluded, $specialSymbolIncluded)
     {
-        # Store form data
-        $numberOfWords = $_POST['number-of-words'];
-        $numberIncluded = isset($_POST['number-included']);
-        $specialSymbolIncluded = isset($_POST['special-symbol-included']);
-
-        # Validate preconditions
-        if (empty(trim($numberOfWords))) {
-            $this->error = "Number of words expected a number but was empty.";
-            return "";
-        } else if (!is_numeric($numberOfWords)) {
-            $this->error = "Number of words expected a number but found '$numberOfWords'.";
-            return "";
-        } else if ($numberOfWords < self::MIN_NUM_WORDS || $numberOfWords > self::MAX_NUM_WORDS) {
-            $this->error = "Number of words should be between '" . self::MIN_NUM_WORDS . "' and '" . self::MAX_NUM_WORDS . "', but found '$numberOfWords'.";
-            return "";
-        }
-
         # Build password of combined random words
         $words = $this->getWords();
         $randomWords = $this->getRandomWords($words, $numberOfWords);
@@ -133,6 +106,16 @@ class PasswordGeneratorController extends Controller
         return $this->insertStringAtRandomIndex($password, $randomSymbol);
     }
 
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        return view('password-generator.index', array('generatedPassword' => ""));
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -140,10 +123,17 @@ class PasswordGeneratorController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(\Project3\Http\Requests\GeneratePasswordRequest $request)
     {
-        $generatedPassword = $this->generateRandomPassword();
-        return view('password_generator', array('generatedPassword' => $generatedPassword, 'error' => $this->error));
+        $input = $request->all();
+
+        $numberOfWords = $input['number-of-words'];
+        $numberIncluded = isset($input['number-included']);
+        $specialSymbolIncluded =  isset($input['special-symbol-included']);
+
+        $generatedPassword = $this->generateRandomPassword($numberOfWords, $numberIncluded, $specialSymbolIncluded);
+        $request->flash();
+        return view('password-generator.index', array('generatedPassword' => $generatedPassword));
     }
 
     /**

@@ -3,12 +3,6 @@
 use Illuminate\Support\Facades\Route;
 
 /**
- * Foobooks code
- * TODO remove foobooks, this is just p3
- */
-Route::resource('books', 'BookController');
-
-/**
  * Main home page
  */
 Route::get('/', function () {

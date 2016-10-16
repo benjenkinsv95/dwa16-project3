@@ -3,13 +3,12 @@
 namespace Project3\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Project3\Http\Requests\FormatLaravelCommentRequest;
 
-use Project3\Http\Requests;
 
 class LaravelCommentFormatterController extends Controller
 {
-    private $error;
-    const PLACEHOLDER_RAW_COMMENT = "This tool will format your text in the style of a Laravel comment. Enter a paragraph of text and try it out for yourself! Once upon a midnight dreary, fingers cramped and vision bleary...";
+    const PLACEHOLDER_COMMENT = "This tool will format your text in the style of a Laravel comment. Enter a paragraph of text and try it out for yourself! Once upon a midnight dreary, fingers cramped and vision bleary...";
     const PLACEHOLDER_TITLE = "Laravel Comment Formatter";
     const FORMATTED_COMMENT_TITLE_HEADER = "/*
 |--------------------------------------------------------------------------
@@ -30,11 +29,10 @@ class LaravelCommentFormatterController extends Controller
      */
     public function index()
     {
-        return view('laravel_comment_formatter',
-            array('PLACEHOLDER_RAW_COMMENT' => self::PLACEHOLDER_RAW_COMMENT,
+        return view('laravel-comment-formatter.index',
+            array('PLACEHOLDER_COMMENT' => self::PLACEHOLDER_COMMENT,
                 'PLACEHOLDER_TITLE' => self::PLACEHOLDER_TITLE,
-                'formattedComment' => $this->getFormattedComment(self::PLACEHOLDER_TITLE, self::PLACEHOLDER_RAW_COMMENT),
-                'error' => $this->error));
+                'formattedComment' => $this->getFormattedComment(self::PLACEHOLDER_TITLE, self::PLACEHOLDER_COMMENT)));
     }
 
 
@@ -44,32 +42,14 @@ class LaravelCommentFormatterController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(FormatLaravelCommentRequest $request)
     {
+        $data = $request->all();
         $request->flash();
-        return view('laravel_comment_formatter',
-            array('PLACEHOLDER_RAW_COMMENT' => self::PLACEHOLDER_RAW_COMMENT,
+        return view('laravel-comment-formatter.index',
+            array('PLACEHOLDER_COMMENT' => self::PLACEHOLDER_COMMENT,
                 'PLACEHOLDER_TITLE' => self::PLACEHOLDER_TITLE,
-                'formattedComment' => $this->generateComment(),
-                'error' => $this->error));
-    }
-
-    /**
-     * @return array random password based off of the form the user filled out.
-     */
-    private function generateComment()
-    {
-        # Store form data
-        $rawComment = $_POST['raw-comment'];
-        $commentTitle = $_POST['title'];
-
-        # Validate preconditions
-        if (empty(trim($rawComment)) || empty(trim($commentTitle))) {
-            $this->error = "Fields should not be empty.";
-            return "";
-        }
-
-        return $this->getFormattedComment($commentTitle, $rawComment);
+                'formattedComment' => $this->getFormattedComment($data['title'], $data['comment'])));
     }
 
     private function getFormattedComment($title, $rawComment){

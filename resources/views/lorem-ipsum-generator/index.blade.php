@@ -14,34 +14,31 @@
         <form class="form-horizontal col-xs-12 col-sm-10 col-md-7 col-lg-6" method="POST" action="{{ url('/lorem_ipsum_generator') }}">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <fieldset>
-                <div class="form-group">
+
+                 @include('forms.form_group', ['id' => 'number-of-paragraphs'])
                     <!-- Inputs get duplicated id's and names, because of the labels and $_POST array.-->
                     <label for="number-of-paragraphs" class="control-label">How many paragraphs? (Max {{ $MAX_NUM_PARAGRAPHS }})</label>
                     <input type="number" class="form-control" id="number-of-paragraphs" name="number-of-paragraphs"
-                           min="{{ $MIN_NUM_PARAGRAPHS }}" max="{{ $MAX_NUM_PARAGRAPHS }}" value="{{ $numberOfParagraphs }}" required>
-                </div>
+                           min="{{ $MIN_NUM_PARAGRAPHS }}" max="{{ $MAX_NUM_PARAGRAPHS }}" value="{{ old('number-of-paragraphs') }}" required>
+                    @if($errors->get('number-of-paragraphs'))
+                        @include('errors.list', ['id' => 'number-of-paragraphs'])
+                    @endif
+                @include('forms.end_form_group')
 
-                <div class="form-group">
+                 @include('forms.form_group', ['id' => 'number-of-sentences'])
                     <!-- Inputs get duplicated id's and names, because of the labels and $_POST array.-->
                     <label for="number-of-sentences" class="control-label">How many sentences? (Max {{ $MAX_NUM_SENTENCES }})</label>
                     <input type="number" class="form-control" id="number-of-sentences" name="number-of-sentences"
-                           min="{{ $MIN_NUM_SENTENCES }}" max="{{ $MAX_NUM_SENTENCES }}" value="{{ $numberOfSentences }}" required>
-                </div>
+                           min="{{ $MIN_NUM_SENTENCES }}" max="{{ $MAX_NUM_SENTENCES }}" value="{{ old('number-of-sentences') }}" required>
+                    @if($errors->get('number-of-sentences'))
+                        @include('errors.list', ['id' => 'number-of-sentences'])
+                    @endif
+                 @include('forms.end_form_group')
 
                 <div class="form-group">
                     <input class="btn btn-primary" type="submit" value="Generate">
                 </div>
             </fieldset>
-
-            <!-- Print out form errors if they exist, would have preferred to do this around each input.-->
-            @if(isset($error))
-                <section>
-                    <h3>Form error</h3>
-                    <div class="alert alert-danger">
-                        <strong>{{ $error }}</strong>
-                    </div>
-                </section>
-            @endif
         </form>
     </div>
 

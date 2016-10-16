@@ -6,16 +6,11 @@ use Illuminate\Http\Request;
 
 use Project3\Http\Requests;
 use Faker\Factory;
+use Project3\Http\Requests\GenerateRandomUserRequest;
 use Project3\RandomUser;
 
 class RandomUserGeneratorController extends Controller
 {
-    private $error;
-    private $numberOfUsers = 6;
-    const MIN_NUM_USERS = 1;
-    const MAX_NUM_USERS = 30;
-
-
     /**
      * Display a listing of the resource.
      *
@@ -23,10 +18,9 @@ class RandomUserGeneratorController extends Controller
      */
     public function index()
     {
-        return \View::make('random_user_generator')->with([
-            'MIN_NUM_USERS' => self::MIN_NUM_USERS,
-            'MAX_NUM_USERS' => self::MAX_NUM_USERS,
-            'numberOfUsers' => $this->numberOfUsers
+        return \View::make('random-user-generator.index')->with([
+            'MIN_NUM_USERS' => GenerateRandomUserRequest::MIN_NUM_USERS,
+            'MAX_NUM_USERS' => GenerateRandomUserRequest::MAX_NUM_USERS
         ]);
     }
 
@@ -36,37 +30,17 @@ class RandomUserGeneratorController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(GenerateRandomUserRequest $request)
     {
-        $this->numberOfUsers = $this->getNumberOfUsers();
-        $users = $this->getUsers($this->numberOfUsers);
+        $data = $request->all();
+        $users = $this->getUsers($data['number-of-users']);
+        $request->flash();
 
-        return \View::make('random_user_generator')->with([
+        return \View::make('random-user-generator.index')->with([
             'users' => $users,
-            'error' => $this->error,
-            'MIN_NUM_USERS' => self::MIN_NUM_USERS,
-            'MAX_NUM_USERS' => self::MAX_NUM_USERS,
-            'numberOfUsers' => $this->numberOfUsers
+            'MIN_NUM_USERS' => GenerateRandomUserRequest::MIN_NUM_USERS,
+            'MAX_NUM_USERS' => GenerateRandomUserRequest::MAX_NUM_USERS
         ]);
-    }
-
-    private function getNumberOfUsers(){
-        # Store form data
-        $numberOfUsers = $_POST['number-of-users'];
-
-        # Validate preconditions
-        if (empty(trim($numberOfUsers))) {
-            $this->error = "Number of users expected a number but was empty.";
-            return 0;
-        } else if (!is_numeric($numberOfUsers)) {
-            $this->error = "Number of users expected a number but found '$numberOfUsers'.";
-            return 0;
-        } else if ($numberOfUsers < self::MIN_NUM_USERS || $numberOfUsers > self::MAX_NUM_USERS) {
-            $this->error = "Number of users should be between '" . self::MIN_NUM_USERS . "' and '" . self::MAX_NUM_USERS . "', but found '$numberOfUsers'.";
-            return 0;
-        }
-
-        return $numberOfUsers;
     }
 
     private function getUsers($numberOfUsers){
@@ -103,7 +77,6 @@ class RandomUserGeneratorController extends Controller
     | returned.
     |
     */
-
     public function getCoverPictureHeight(){
         return 200;
     }

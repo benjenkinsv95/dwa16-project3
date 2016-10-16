@@ -6,18 +6,10 @@ use Illuminate\Http\Request;
 use Project3\Http\Requests;
 use Faker\Factory;
 use Storage;
+use \Project3\Http\Requests\GenerateLoremIpsumRequest;
 
 class LoremIpsumGeneratorController extends Controller
 {
-    const MIN_NUM_PARAGRAPHS = 1;
-    const MAX_NUM_PARAGRAPHS = 99;
-    private $numberOfParagraphs = 10;
-    const MIN_NUM_SENTENCES = 1;
-    const MAX_NUM_SENTENCES = 99;
-    private $numberOfSentences = 5;
-
-    private $error;
-
     /**
      * Display a listing of the resource.
      *
@@ -25,13 +17,11 @@ class LoremIpsumGeneratorController extends Controller
      */
     public function index()
     {
-        return \View::make('lorem_ipsum_generator')->with([
-            'MIN_NUM_PARAGRAPHS' => self::MIN_NUM_PARAGRAPHS,
-            'MAX_NUM_PARAGRAPHS' => self::MAX_NUM_PARAGRAPHS,
-            'numberOfParagraphs' => $this->numberOfParagraphs,
-            'MIN_NUM_SENTENCES' => self::MIN_NUM_SENTENCES,
-            'MAX_NUM_SENTENCES' => self::MAX_NUM_SENTENCES,
-            'numberOfSentences' => $this->numberOfSentences
+        return \View::make('lorem-ipsum-generator.index')->with([
+            'MIN_NUM_PARAGRAPHS' => GenerateLoremIpsumRequest::MIN_NUM_PARAGRAPHS,
+            'MAX_NUM_PARAGRAPHS' => GenerateLoremIpsumRequest::MAX_NUM_PARAGRAPHS,
+            'MIN_NUM_SENTENCES' => GenerateLoremIpsumRequest::MIN_NUM_SENTENCES,
+            'MAX_NUM_SENTENCES' => GenerateLoremIpsumRequest::MAX_NUM_SENTENCES
         ]);
     }
 
@@ -41,40 +31,19 @@ class LoremIpsumGeneratorController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(GenerateLoremIpsumRequest $request)
     {
-        $this->numberOfParagraphs = $this->getNumberOf('paragraph', Self::MIN_NUM_PARAGRAPHS, Self::MAX_NUM_PARAGRAPHS);
-        $this->numberOfSentences = $this->getNumberOf('sentence', Self::MIN_NUM_SENTENCES, Self::MAX_NUM_SENTENCES);
-        $paragraphs = $this->getParagraphs($this->numberOfParagraphs, $this->numberOfSentences);
+        $data = $request->all();
+        $paragraphs = $this->getParagraphs($data['number-of-paragraphs'], $data['number-of-sentences']);
 
-        return \View::make('lorem_ipsum_generator')->with([
-            'MIN_NUM_PARAGRAPHS' => self::MIN_NUM_PARAGRAPHS,
-            'MAX_NUM_PARAGRAPHS' => self::MAX_NUM_PARAGRAPHS,
-            'numberOfParagraphs' => $this->numberOfParagraphs,
-            'MIN_NUM_SENTENCES' => self::MIN_NUM_SENTENCES,
-            'MAX_NUM_SENTENCES' => self::MAX_NUM_SENTENCES,
-            'numberOfSentences' => $this->numberOfSentences,
+        $request->flash();
+        return \View::make('lorem-ipsum-generator.index')->with([
+            'MIN_NUM_PARAGRAPHS' => GenerateLoremIpsumRequest::MIN_NUM_PARAGRAPHS,
+            'MAX_NUM_PARAGRAPHS' => GenerateLoremIpsumRequest::MAX_NUM_PARAGRAPHS,
+            'MIN_NUM_SENTENCES' => GenerateLoremIpsumRequest::MIN_NUM_SENTENCES,
+            'MAX_NUM_SENTENCES' => GenerateLoremIpsumRequest::MAX_NUM_SENTENCES,
             'paragraphs' => $paragraphs
         ]);
-    }
-
-    private function getNumberOf($items, $min, $max){
-        # Store form data
-        $numberOfItems = $_POST['number-of-' . $items .'s'];
-
-        # Validate preconditions
-        if (empty(trim($numberOfItems))) {
-            $this->error = "Number of ' . $items . 's expected a number but was empty.";
-            return 0;
-        } else if (!is_numeric($numberOfItems)) {
-            $this->error = "Number of ' . $items . 's expected a number but found '$numberOfItems'.";
-            return 0;
-        } else if ($numberOfItems < $min || $numberOfItems > $max) {
-            $this->error = "Number of ' . $items . 's should be between '" . $min . "' and '" . $max . "', but found '$numberOfItems'.";
-            return 0;
-        }
-
-        return $numberOfItems;
     }
 
     private function getParagraphs($numberOfParagraphs, $numberOfSentences){
