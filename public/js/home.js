@@ -1,4 +1,5 @@
 $(document).ready(function () {
-    bounceInToContent('.card');
-    bounceInToContent('.dev-tool');
+    initialDelay = 300;
+    bounceInToContent('.card', initialDelay);
+    bounceInToContent('.dev-tool', initialDelay);
 });

@@ -3,10 +3,10 @@
  * Learned and modified from:
  * https://www.youtube.com/watch?v=AWAnrQCYsVM
  */
-function bounceInToContent(className) {
+function bounceInToContent(className, initialDelay) {
     $(className).each(function (i) {
         setTimeout(function () {
             $(className).eq(i).addClass('is-visible');
-        }, 300 + (300 * i));
+        }, initialDelay + (350 * i));
     });
 }

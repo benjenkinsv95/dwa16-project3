@@ -23,13 +23,35 @@
 
                 <div class="form-group">
                     <strong>Include</strong>
-                    @include('forms.checkbox', ['id' => 'pictures-included', 'label' => 'Pictures', 'checked' => 'checked'])
-                    @include('forms.checkbox', ['id' => 'username-included', 'label' => 'Username', 'checked' => 'checked'])
-                    @include('forms.checkbox', ['id' => 'password-included', 'label' => 'Password', 'checked' => 'checked'])
-                    @include('forms.checkbox', ['id' => 'email-included', 'label' => 'Email', 'checked' => 'checked'])
-                    @include('forms.checkbox', ['id' => 'birthday-included', 'label' => 'Birthday', 'checked' => 'checked'])
-                    @include('forms.checkbox', ['id' => 'address-included', 'label' => 'Address', 'checked' => 'checked'])
-                    @include('forms.checkbox', ['id' => 'phone-number-included', 'label' => 'Phone Number', 'checked' => 'checked'])
+                    <div class="row">
+                        <div class="col-xs-6 col-sm-3">
+                            @include('forms.checkbox', ['id' => 'pictures-included', 'label' => 'Pictures', 'checked' => 'checked'])
+                        </div>
+
+                        <div class="col-xs-6 col-sm-3">
+                            @include('forms.checkbox', ['id' => 'username-included', 'label' => 'Username', 'checked' => 'checked'])
+                        </div>
+
+                        <div class="col-xs-6 col-sm-3">
+                            @include('forms.checkbox', ['id' => 'password-included', 'label' => 'Password', 'checked' => 'checked'])
+                        </div>
+
+                        <div class="col-xs-6 col-sm-3">
+                            @include('forms.checkbox', ['id' => 'email-included', 'label' => 'Email', 'checked' => 'checked'])
+                        </div>
+
+                        <div class="col-xs-6 col-sm-3">
+                            @include('forms.checkbox', ['id' => 'birthday-included', 'label' => 'Birthday', 'checked' => 'checked'])
+                        </div>
+
+                        <div class="col-xs-6 col-sm-3">
+                            @include('forms.checkbox', ['id' => 'address-included', 'label' => 'Address', 'checked' => 'checked'])
+                        </div>
+
+                        <div class="col-xs-6 col-sm-3">
+                            @include('forms.checkbox', ['id' => 'phone-number-included', 'label' => 'Phone Number', 'checked' => 'checked'])
+                        </div>
+                    </div>
                 </div>
 
 
@@ -44,36 +66,50 @@
         <div class="row container">
             @foreach($users as $user)
                     {{--Snippet based off of: http://bootsnipp.com/snippets/featured/profile-card--}}
-                    <div class="col-md-4 col-sm-6 col-xs-12 card hovercard user">
+                    <div class="col-sm-6 col-xs-12 card hovercard user">
                         @if(!empty($user->getCoverPictureURL()))
-                            <img class="cardheader img-responsive" alt="" src={{$user->getCoverPictureURL()}}>
+                            <img class="cardheader img-responsive" alt="A background image." src={{$user->getCoverPictureURL()}}>
                         @endif
                         @if(!empty($user->getProfilePictureURL()))
                             <div class="avatar">
-                                <img alt="" src={{$user->getProfilePictureURL()}}>
+                                <img alt="A random user's profile picture." src={{$user->getProfilePictureURL()}}>
                             </div>
                         @endif
 
                         <div class="info">
                             <div class="title">{{ $user->getFullName() }}</div>
-                            @if(!empty($user->getUserName()))
-                                <div class="desc"><i class="fa fa-user" aria-hidden="true"></i> {{ $user->getUserName() }}</div>
-                            @endif
-                            @if(!empty($user->getPassword()))
-                                <div class="desc"><i class="fa fa-unlock-alt" aria-hidden="true"></i> {{ $user->getPassword() }}</div>
-                            @endif
-                            @if(!empty($user->getEmail()))
-                                <div class="desc"><i class="fa fa-envelope" aria-hidden="true"></i> {{ $user->getEmail() }}</div>
-                            @endif
-                            @if(!empty($user->getBirthDate()))
-                                <div class="desc"><i class="fa fa-calendar" aria-hidden="true"></i> {{ $user->getBirthDate() }}</div>
-                            @endif
-                            @if(!empty($user->getStreetAddress()))
-                                <div class="desc"><i class="fa fa-map-marker" aria-hidden="true"></i> {{ $user->getStreetAddress() }}</div>
-                            @endif
-                            @if(!empty($user->getPhoneNumber()))
-                                <div class="desc"><i class="fa fa-mobile" aria-hidden="true"></i> {{ $user->getPhoneNumber() }}</div>
-                            @endif
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    @if(!empty($user->getUserName()))
+                                        <div class="desc"><i class="fa fa-user" aria-hidden="true"></i> {{ $user->getUserName() }}</div>
+                                    @endif
+                                </div>
+                                <div class="col-sm-6">
+                                    @if(!empty($user->getPassword()))
+                                        <div class="desc"><i class="fa fa-unlock-alt" aria-hidden="true"></i> {{ $user->getPassword() }}</div>
+                                    @endif
+                                </div>
+                                <div class="col-sm-6">
+                                    @if(!empty($user->getEmail()))
+                                        <div class="desc"><i class="fa fa-envelope" aria-hidden="true"></i> {{ $user->getEmail() }}</div>
+                                    @endif
+                                </div>
+                                <div class="col-sm-6">
+                                    @if(!empty($user->getBirthDate()))
+                                        <div class="desc"><i class="fa fa-calendar" aria-hidden="true"></i> {{ $user->getBirthDate() }}</div>
+                                    @endif
+                                </div>
+                                <div class="col-sm-6">
+                                    @if(!empty($user->getStreetAddress()))
+                                        <div class="desc"><i class="fa fa-map-marker" aria-hidden="true"></i> {{ $user->getStreetAddress() }}</div>
+                                    @endif
+                                </div>
+                                <div class="col-sm-6">
+                                    @if(!empty($user->getPhoneNumber()))
+                                        <div class="desc"><i class="fa fa-mobile" aria-hidden="true"></i> {{ $user->getPhoneNumber() }}</div>
+                                    @endif
+                                </div>
+                            </div>
                         </div>
                     </div>
             @endforeach

@@ -1,9 +1,3 @@
-@media (max-width: 768px) {
-    .row div {
-        padding: 0;
-    }
-}
-
 .is-visible {
     -webkit-animation: PopupItems 700ms ease-in forwards;
     animation: PopupItems 700ms ease-in forwards;

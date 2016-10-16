@@ -20,7 +20,12 @@
                     "Abort, Retry, Ignore."
                 </p>
             </div>
-            <a href="{{ URL::route('lorem_ipsum_generator.index') }}" class="btn btn-primary">View</a>
+
+            <div class="row">
+                <div class="col-sm-4 col-sm-offset-4">
+                    <a href="{{ URL::route('lorem_ipsum_generator.index') }}" class="btn btn-primary btn-block">View</a>
+                </div>
+            </div>
         </div>
 
         <div class="col-md-6 text-center dev-tool">
@@ -45,7 +50,11 @@
                 </div>
             </div>
 
-            <a href="{{ URL::route('random_user_generator.index') }}" class="btn btn-primary">View</a>
+            <div class="row">
+                <div class="col-sm-4 col-sm-offset-4">
+                    <a href="{{ URL::route('random_user_generator.index') }}" class="btn btn-primary btn-block">View</a>
+                </div>
+            </div>
         </div>
     </div>
     <div class="row">
@@ -59,7 +68,11 @@
                 <pre>crash-tight-en~tertaining-damaging-moti8on</pre>
             </div>
 
-            <a href="{{ URL::route('password_generator.index') }}" class="btn btn-primary">View</a>
+            <div class="row">
+                <div class="col-sm-4 col-sm-offset-4">
+                    <a href="{{ URL::route('password_generator.index') }}" class="btn btn-primary btn-block">View</a>
+                </div>
+            </div>
         </div>
 
         <div class="col-md-6 text-center dev-tool">
@@ -75,8 +88,11 @@
 |
 */</pre>
             </div>
-
-            <a href="{{ URL::route('laravel_comment_formatter.index') }}" class="btn btn-primary">View</a>
+            <div class="row">
+                <div class="col-sm-4 col-sm-offset-4">
+                    <a href="{{ URL::route('laravel_comment_formatter.index') }}" class="btn btn-primary btn-block">View</a>
+                </div>
+            </div>
         </div>
     </div>
 

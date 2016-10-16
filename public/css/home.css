@@ -73,12 +73,6 @@
     opacity: 0;
 }
 
-@media (max-width: 768px) {
-    .row div {
-        padding: 0;
-    }
-}
-
 .first-row {
     margin-top: 40px;
 }
