@@ -4,6 +4,7 @@ namespace Project3\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Redirect;
 use Project3\Http\Requests;
 use Faker\Factory;
 use Project3\Http\Requests\GenerateRandomUserRequest;
@@ -32,8 +33,8 @@ class RandomUserGeneratorController extends Controller
      */
     public function store(GenerateRandomUserRequest $request)
     {
-        $data = $request->all();
-        $users = $this->getUsers($data['number-of-users']);
+        $formData = $request->all();
+        $users = $this->getUsers($formData);
         $request->flash();
 
         return \View::make('random-user-generator.index')->with([
@@ -43,27 +44,41 @@ class RandomUserGeneratorController extends Controller
         ]);
     }
 
-    private function getUsers($numberOfUsers){
+    private function getUsers($formData){
         $factory = Factory::create('en_US');
         $users = [];
+
+        $numberOfUsers = $formData['number-of-users'];
         for($i = 1; $i <= $numberOfUsers; $i++){
-            $user = $this->generateRandomUser($factory, $i, $numberOfUsers);
+            $user = $this->generateRandomUser($factory,  $formData);
             array_push($users, $user);
         }
 
         return $users;
     }
 
-    private function generateRandomUser($factory, $userNumber, $numberOfUsers){
+    /**
+     * @param $factory
+     * @param $formData
+     * @return RandomUser
+     *  @include('forms.checkbox', ['id' => 'pictures-included', 'label' => 'Pictures', 'checked' => 'checked'])
+        @include('forms.checkbox', ['id' => 'username-included', 'label' => 'Username', 'checked' => 'checked'])
+        @include('forms.checkbox', ['id' => 'password-included', 'label' => 'Password', 'checked' => 'checked'])
+        @include('forms.checkbox', ['id' => 'email-included', 'label' => 'Email', 'checked' => 'checked'])
+        @include('forms.checkbox', ['id' => 'birthday-included', 'label' => 'Birthday', 'checked' => 'checked'])
+        @include('forms.checkbox', ['id' => 'address-included', 'label' => 'Address', 'checked' => 'checked'])
+        @include('forms.checkbox', ['id' => 'phone-number-included', 'label' => 'Phone Number', 'checked' => 'checked'])
+     */
+    private function generateRandomUser($factory, $formData){
         $fullName = $factory->name;
-        $userName = $factory->userName;
-        $password = $factory->password;
-        $email = $userName . '@' . $factory->freeEmailDomain;
-        $birthDate = $factory->dateTimeBetween('-30 years', '-18 years')->format('m/d/y');
-        $streetAddress = $factory->streetAddress;
-        $phoneNumber = $factory->phoneNumber;
-        $coverPictureURL = 'http://placeimg.com/' . $this->getCoverPictureWidth() . '/' . $this->getCoverPictureHeight().'/nature';
-        $profilePictureURL = 'http://placeimg.com/' . $this->getProfilePictureWidth() . '/' . $this->getProfilePictureHeight().'/people';
+        $userName = isset($formData['username-included']) ?  $factory->userName  : "";
+        $password = isset($formData['password-included']) ?  $factory->password : "";
+        $email = isset($formData['email-included']) ?  $userName . '@' . $factory->freeEmailDomain : "";
+        $birthDate = isset($formData['birthday-included']) ?  $factory->dateTimeBetween('-30 years', '-18 years')->format('m/d/y') : "";
+        $streetAddress = isset($formData['address-included']) ?  $factory->streetAddress : "";
+        $phoneNumber = isset($formData['phone-number-included']) ?  $factory->phoneNumber : "";
+        $coverPictureURL = isset($formData['pictures-included']) ?  'http://placeimg.com/' . $this->getCoverPictureWidth() . '/' . $this->getCoverPictureHeight().'/nature' : "";
+        $profilePictureURL = isset($formData['pictures-included']) ?  'http://placeimg.com/' . $this->getProfilePictureWidth() . '/' . $this->getProfilePictureHeight().'/people' : "";
 
         return new RandomUser($fullName, $userName, $password, $email, $birthDate, $streetAddress, $phoneNumber, $coverPictureURL, $profilePictureURL);
     }

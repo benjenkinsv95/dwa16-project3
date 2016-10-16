@@ -13,7 +13,7 @@
                     @include('forms.form_group', ['id' => 'number-of-words'])
                         <label for="number-of-words" class="control-label">Number of words (Max 9)</label>
                         <input type="number" class="form-control" id="number-of-words" name="number-of-words"
-                               min="1" max="9" value="{{ old('number-of-words') }}" required>
+                               min="1" max="9" value="{{ old('number-of-words', 5) }}" required>
                         @if($errors->get('number-of-words'))
                             @include('errors.list', ['id' => 'number-of-words'])
                         @endif
@@ -21,18 +21,8 @@
 
                     <div class="form-group">
                         <strong>Include</strong>
-                        <div class="checkbox">
-                            <label for="number-included">
-                                <input type="checkbox" id="number-included" name="number-included" value="{{ old('number-included') }}">
-                                 Number
-                            </label>
-                        </div>
-                        <div class="checkbox">
-                            <label for="special-symbol-included">
-                                <input type="checkbox" id="special-symbol-included" name="special-symbol-included" value="{{ old('special-symbol-included') }}">
-                                Special Symbol
-                            </label>
-                        </div>
+                        @include('forms.checkbox', ['id' => 'number-included', 'label' => 'Number'])
+                        @include('forms.checkbox', ['id' => 'special-symbol-included', 'label' => 'Special Symbol'])
                     </div>
 
                     <div class="form-group">
