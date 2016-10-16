@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('title', 'Developer\'s Best Friend')
+@section('description', 'Tools that enable faster development.')
+
 @section('header')
     <link href="/css/random_user.css" rel="stylesheet">
     <link href="/css/home.css" rel="stylesheet">

@@ -61,7 +61,7 @@
                     </li>
 
                     <!--Tacking in a font-awesome GitHub icon to make it look fancy-->
-                    <li><a href="https://github.com/benjenkinsv95/dwa16-project3">GitHub <i id="p1-github-icon"
+                    <li><a href="https://github.com/benjenkinsv95/dwa16-project3" target='_blank'>GitHub <i id="p1-github-icon"
                                                                                             class="fa fa-github"
                                                                                             aria-hidden="true"></i></a>
                     </li>
@@ -70,15 +70,20 @@
         </div>
     </nav>
 
-    <div class="container">
+
+    <div class="page-content container">
         <div class="row page-info">
             <h1>@yield('title')</h1>
             <h3>@yield('description')</h3>
         </div>
+        @yield('content')
     </div>
 
-    <div class="container">
-            @yield('content')
+    <div class="footer jumbotron">
+        <div class="container text-center">
+            &copy; Ben Jenkins {{ date('Y') }} <br>
+            <a href='https://github.com/benjenkinsv95/dwa16-project3' target='_blank'>GitHub <i class='fa fa-github'></i></a> &nbsp;&nbsp;
+        </div>
     </div>
 </div>
 
