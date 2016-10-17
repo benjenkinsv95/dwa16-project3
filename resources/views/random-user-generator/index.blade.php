@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title', 'Random User Generator')
-@section('description', 'Creates random user\'s for your application.')
+@section('description', 'Creates random users for your application.')
 
 @section('header')
     <link href="/css/random_user.css" rel="stylesheet">

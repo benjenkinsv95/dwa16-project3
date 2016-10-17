@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Ben Jenkins - @yield('title')</title>
+    <title>@yield('title') - Ben Jenkins</title>
     <link href="libs/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="libs/font-awesome-4.6.3/css/font-awesome.min.css" rel="stylesheet">
     <link href="images/favicon.png" rel="shortcut icon">
@@ -81,7 +81,7 @@
 
     <div class="footer jumbotron">
         <div class="container text-center">
-            &copy; Ben Jenkins {{ date('Y') }} <br>
+            Copyright © {{ date('Y') }} Ben Jenkins. All rights reserved.<br>
             <a href='https://github.com/benjenkinsv95/dwa16-project3' target='_blank'>GitHub <i class='fa fa-github'></i></a> &nbsp;&nbsp;
         </div>
     </div>

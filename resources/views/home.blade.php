@@ -65,7 +65,7 @@
                 <i class="fa fa-key fa-4x" aria-hidden="true"></i>
                 <h3>xkcd-Style Password Generator</h3>
                 <p>
-                    Create a secure password! Password's are based off of the popular web-comic <a href="https://xkcd.com/936/">xkcd.</a>
+                    Create a secure password! Passwords are based off of the popular web-comic <a href="https://xkcd.com/936/">xkcd.</a>
                 </p>
                 <pre>crash-tight-en~tertaining-damaging-moti8on</pre>
             </div>
