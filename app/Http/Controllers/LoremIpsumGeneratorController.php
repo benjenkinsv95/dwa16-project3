@@ -26,12 +26,12 @@ class LoremIpsumGeneratorController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Show the generated Lorem Ipsum Text.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @param GenerateLoremIpsumRequest $request
+     * @return mixed
      */
-    public function store(GenerateLoremIpsumRequest $request)
+    public function getLoremIpsumText(GenerateLoremIpsumRequest $request)
     {
         $data = $request->all();
         $paragraphs = $this->getParagraphs($data['number-of-paragraphs'], $data['number-of-sentences']);
@@ -73,15 +73,15 @@ class LoremIpsumGeneratorController extends Controller
         return implode(" ", $paragraphSentences);
     }
 
-    public function getPoemSentences()
+    private function getPoemSentences()
     {
         $contents = Storage::get("midnight_dreary.txt");
         return $this->getSentencesFromText($contents);
     }
 
-    private function getSentencesFromText($str){
+    private function getSentencesFromText($text){
         // Regex from: http://stackoverflow.com/a/6360686/3500171
-        $textWithoutMultipleLineBreaks = preg_replace("/[\r\n]+/", "\n", $str);
+        $textWithoutMultipleLineBreaks = preg_replace("/[\r\n]+/", "\n", $text);
         return preg_split('/\n+/', $textWithoutMultipleLineBreaks);
     }
 }

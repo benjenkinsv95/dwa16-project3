@@ -25,18 +25,14 @@ class RandomUserGeneratorController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(GenerateRandomUserRequest $request)
+
+    public function getRandomUsers(GenerateRandomUserRequest $request)
     {
         $formData = $request->all();
-        $users = $this->getUsers($formData);
-        $request->flash();
+        $users = $this->buildUsers($formData);
 
+
+        $request->flash();
         return \View::make('random-user-generator.index')->with([
             'users' => $users,
             'MIN_NUM_USERS' => GenerateRandomUserRequest::MIN_NUM_USERS,
@@ -44,7 +40,7 @@ class RandomUserGeneratorController extends Controller
         ]);
     }
 
-    private function getUsers($formData){
+    private function buildUsers($formData){
         $factory = Factory::create('en_US');
         $users = [];
 
@@ -85,23 +81,23 @@ class RandomUserGeneratorController extends Controller
     | returned.
     |
     */
-    public function getCoverPictureHeight(){
+    private function getCoverPictureHeight(){
         return 160;
     }
 
-    public function getCoverPictureWidth(){
+    private function getCoverPictureWidth(){
         return 350 + $this->getWidthOffset();
     }
 
-    public function getProfilePictureHeight(){
+    private function getProfilePictureHeight(){
         return 160;
     }
 
-    public function getProfilePictureWidth(){
+    private function getProfilePictureWidth(){
         return 160 + $this->getWidthOffset();
     }
 
-    public function getWidthOffset(){
+    private function getWidthOffset(){
         return random_int(0, 14);
     }
 }

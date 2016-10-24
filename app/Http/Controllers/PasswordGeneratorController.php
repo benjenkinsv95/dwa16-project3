@@ -5,6 +5,7 @@ namespace Project3\Http\Controllers;
 use Fadion\Rule\Rule;
 use Illuminate\Http\Request;
 use Project3\Http\Requests;
+use Project3\Http\Requests\GeneratePasswordRequest;
 use Rych\Random\Random;
 use Barryvdh\Debugbar\Facade as Debugbar;
 
@@ -76,8 +77,7 @@ class PasswordGeneratorController extends Controller
      * @param $array array An array of values
      * @return mixed A random value from the array
      */
-    private
-    function getRandomKey($array)
+    private function getRandomKey($array)
     {
         $randomIndex = mt_rand(0, count($array) - 1);
         $randomKey = $array[$randomIndex];
@@ -117,13 +117,8 @@ class PasswordGeneratorController extends Controller
         return view('password-generator.index', array('generatedPassword' => ""));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(\Project3\Http\Requests\GeneratePasswordRequest $request)
+
+    public function getRandomPassword(GeneratePasswordRequest $request)
     {
         $input = $request->all();
 

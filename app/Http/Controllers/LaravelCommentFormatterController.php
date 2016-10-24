@@ -37,12 +37,12 @@ class LaravelCommentFormatterController extends Controller
 
 
     /**
-     * Store a newly created resource in storage.
+     * Display a comment formatted in the style of laravel comments.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param FormatLaravelCommentRequest $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function store(FormatLaravelCommentRequest $request)
+    public function getLaravelFormattedComment(FormatLaravelCommentRequest $request)
     {
         $data = $request->all();
         $request->flash();
@@ -59,7 +59,7 @@ class LaravelCommentFormatterController extends Controller
     }
 
     private function getFormattedParagraphs($textContent){
-        $paragraphs = $this->getParagraphs($textContent);
+        $paragraphs = $this->getParagraphsFromText($textContent);
 
         $formattedParagraphs = [];
         foreach($paragraphs as $paragraph){
@@ -71,7 +71,7 @@ class LaravelCommentFormatterController extends Controller
     }
 
     private function getFormattedParagraph($paragraph){
-        $words = $this->getWords($paragraph);
+        $words = $this->getWordsFromText($paragraph);
 
         $maxLineLength = self::MAX_LINE_LENGTH;
         $formattedParagraph = "|";
@@ -94,13 +94,14 @@ class LaravelCommentFormatterController extends Controller
         return $formattedParagraph;
     }
 
-    private function getParagraphs($str){
+
+    private function getParagraphsFromText($text){
         // Regex from: http://stackoverflow.com/a/6360686/3500171
-        $textWithoutMultipleLineBreaks = preg_replace("/[\r\n]+/", "\n", $str);
+        $textWithoutMultipleLineBreaks = preg_replace("/[\r\n]+/", "\n", $text);
         return preg_split('/\n+/', $textWithoutMultipleLineBreaks);
     }
 
-    private function getWords($str){
-        return preg_split('/\s+/', $str);
+    private function getWordsFromText($text){
+        return preg_split('/\s+/', $text);
     }
 }
