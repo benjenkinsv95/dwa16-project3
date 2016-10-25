@@ -35,30 +35,15 @@ class LaravelCommentFormatterController extends Controller
                 'formattedComment' => $this->getFormattedComment(self::PLACEHOLDER_TITLE, self::PLACEHOLDER_COMMENT)));
     }
 
-
-    /**
-     * Display a comment formatted in the style of laravel comments.
-     *
-     * @param FormatLaravelCommentRequest $request
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function getLaravelFormattedComment(FormatLaravelCommentRequest $request)
+    private function getFormattedComment($title, $rawComment)
     {
-        $data = $request->all();
-        $request->flash();
-        return view('laravel-comment-formatter.index',
-            array('PLACEHOLDER_COMMENT' => self::PLACEHOLDER_COMMENT,
-                'PLACEHOLDER_TITLE' => self::PLACEHOLDER_TITLE,
-                'formattedComment' => $this->getFormattedComment($data['title'], $data['comment'])));
-    }
-
-    private function getFormattedComment($title, $rawComment){
         $formattedTitle = self::FORMATTED_COMMENT_TITLE_HEADER . $title . self::FORMATTED_COMMENT_TITLE_FOOTER;
         $formattedParagraphs = $this->getFormattedParagraphs($rawComment);
         return $formattedTitle . $formattedParagraphs . SELF::FORMATTED_COMMENT_FOOTER;
     }
 
-    private function getFormattedParagraphs($textContent){
+    private function getFormattedParagraphs($textContent)
+    {
         $paragraphs = $this->getParagraphsFromText($textContent);
 
         $formattedParagraphs = [];
@@ -70,7 +55,15 @@ class LaravelCommentFormatterController extends Controller
         return implode("\n|\n", $formattedParagraphs);
     }
 
-    private function getFormattedParagraph($paragraph){
+    private function getParagraphsFromText($text)
+    {
+        // Regex learned from: http://stackoverflow.com/a/6360686/3500171
+        $textWithoutMultipleLineBreaks = preg_replace("/[\r\n]+/", "\n", $text);
+        return preg_split('/\n+/', $textWithoutMultipleLineBreaks);
+    }
+
+    private function getFormattedParagraph($paragraph)
+    {
         $words = $this->getWordsFromText($paragraph);
 
         $maxLineLength = self::MAX_LINE_LENGTH;
@@ -94,14 +87,24 @@ class LaravelCommentFormatterController extends Controller
         return $formattedParagraph;
     }
 
-
-    private function getParagraphsFromText($text){
-        // Regex learned from: http://stackoverflow.com/a/6360686/3500171
-        $textWithoutMultipleLineBreaks = preg_replace("/[\r\n]+/", "\n", $text);
-        return preg_split('/\n+/', $textWithoutMultipleLineBreaks);
+    private function getWordsFromText($text)
+    {
+        return preg_split('/\s+/', $text);
     }
 
-    private function getWordsFromText($text){
-        return preg_split('/\s+/', $text);
+    /**
+     * Display a comment formatted in the style of laravel comments.
+     *
+     * @param FormatLaravelCommentRequest $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function getLaravelFormattedComment(FormatLaravelCommentRequest $request)
+    {
+        $data = $request->all();
+        $request->flash();
+        return view('laravel-comment-formatter.index',
+            array('PLACEHOLDER_COMMENT' => self::PLACEHOLDER_COMMENT,
+                'PLACEHOLDER_TITLE' => self::PLACEHOLDER_TITLE,
+                'formattedComment' => $this->getFormattedComment($data['title'], $data['comment'])));
     }
 }

@@ -2,14 +2,6 @@
 
 namespace Project3\Http\Controllers;
 
-use Illuminate\Http\Request;
-
-use Illuminate\Support\Facades\Redirect;
-use Project3\Http\Requests;
-use Faker\Factory;
-use Project3\Http\Requests\GenerateRandomUserRequest;
-use Project3\RandomUser;
-
 class RandomUserGeneratorController extends Controller
 {
     /**
@@ -29,7 +21,7 @@ class RandomUserGeneratorController extends Controller
     public function getRandomUsers(GenerateRandomUserRequest $request)
     {
         $formData = $request->all();
-        $users = $this->buildUsers($formData);
+        $users = $this->generateUsers($formData);
 
 
         $request->flash();
@@ -40,7 +32,8 @@ class RandomUserGeneratorController extends Controller
         ]);
     }
 
-    private function buildUsers($formData){
+    private function generateUsers($formData)
+    {
         $factory = Factory::create('en_US');
         $users = [];
 
@@ -58,7 +51,8 @@ class RandomUserGeneratorController extends Controller
      * @param $formData
      * @return RandomUser
      */
-    private function generateRandomUser($factory, $formData){
+    private function generateRandomUser($factory, $formData)
+    {
         $fullName = $factory->name;
         $userName = isset($formData['username-included']) ?  $factory->userName  : "";
         $password = isset($formData['password-included']) ?  $factory->password : "";
@@ -81,15 +75,19 @@ class RandomUserGeneratorController extends Controller
     | returned.
     |
     */
-    private function getCoverPictureHeight(){
-        return 160;
-    }
 
-    private function getCoverPictureWidth(){
+    private function getCoverPictureWidth()
+    {
         return 350 + $this->getWidthOffset();
     }
 
-    private function getProfilePictureHeight(){
+    private function getWidthOffset()
+    {
+        return random_int(0, 14);
+    }
+
+    private function getCoverPictureHeight()
+    {
         return 160;
     }
 
@@ -97,7 +95,8 @@ class RandomUserGeneratorController extends Controller
         return 160 + $this->getWidthOffset();
     }
 
-    private function getWidthOffset(){
-        return random_int(0, 14);
+    private function getProfilePictureHeight()
+    {
+        return 160;
     }
 }
