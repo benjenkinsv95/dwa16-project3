@@ -80,7 +80,7 @@ class LoremIpsumGeneratorController extends Controller
     }
 
     private function getSentencesFromText($text){
-        // Regex from: http://stackoverflow.com/a/6360686/3500171
+        // Regex learned from: http://stackoverflow.com/a/6360686/3500171
         $textWithoutMultipleLineBreaks = preg_replace("/[\r\n]+/", "\n", $text);
         return preg_split('/\n+/', $textWithoutMultipleLineBreaks);
     }

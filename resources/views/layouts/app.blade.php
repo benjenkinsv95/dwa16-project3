@@ -57,8 +57,7 @@
                     </li>
 
                     <!--Tacking in a font-awesome GitHub icon to make it look fancy-->
-                    <li><a href="https://github.com/benjenkinsv95/dwa16-project3" target='_blank'>GitHub <i id="p1-github-icon"
-                                                                                            class="fa fa-github"
+                    <li><a href="https://github.com/benjenkinsv95/dwa16-project3" target='_blank'>GitHub <i class="fa fa-github"
                                                                                             aria-hidden="true"></i></a>
                     </li>
                 </ul>
