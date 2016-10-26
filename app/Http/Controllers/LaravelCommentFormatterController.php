@@ -59,7 +59,7 @@ class LaravelCommentFormatterController extends Controller
     {
         // Regex learned from: http://stackoverflow.com/a/6360686/3500171
         $textWithoutMultipleLineBreaks = preg_replace("/[\r\n]+/", "\n", $text);
-        return preg_split('/\n+/', $textWithoutMultipleLineBreaks);
+        return preg_split('/\n+/', $textWithoutMultipleLineBreaks); 
     }
 
     private function getFormattedParagraph($paragraph)
