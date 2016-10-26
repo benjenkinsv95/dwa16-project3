@@ -1,5 +1,4 @@
-# Title
-Developer's Best Friend
+# Developer's Best Friend
 
 ## Live URL
 <http://p3.ben-jenkins.com/>
