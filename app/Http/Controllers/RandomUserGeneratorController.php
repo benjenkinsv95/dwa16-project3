@@ -2,6 +2,13 @@
 
 namespace Project3\Http\Controllers;
 
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use Project3\Http\Requests;
+use Faker\Factory;
+use Project3\Http\Requests\GenerateRandomUserRequest;
+use Project3\RandomUser;
+
 class RandomUserGeneratorController extends Controller
 {
     /**
